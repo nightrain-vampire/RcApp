@@ -1,0 +1,3 @@
+/* 引入colorUI样式 */
+@import "/icon.wxss";
+@import "/main.wxss";

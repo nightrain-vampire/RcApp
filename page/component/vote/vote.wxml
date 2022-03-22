@@ -1,0 +1,13 @@
+<view class="main">
+    <view class="searchbar">
+        搜索栏 to be continued...
+    </view>
+    <view class="container">
+        <view wx:for="{{cardData}}">
+            <view class="card-info">
+                {{item.id}}
+                <navigator url='/page/component/card/card?id={{item.id}}'>查看详情</navigator>
+            </view>
+        </view>
+    </view>
+</view>
