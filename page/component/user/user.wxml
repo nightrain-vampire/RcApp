@@ -2,13 +2,13 @@
     <view class="header">
         <view>头像昵称 to be continued...</view>
     </view>
-    <view>
+    <view class="navbar">
         <navigator url="/page/component/index/index">个人信息</navigator>
     </view>
-    <view>
+    <view class="navbar">
         <navigator url="/page/component/history/history">我的提名</navigator>
     </view>
-    <view>
+    <view class="navbar">
         <navigator url="/page/component/admin/admin">提名审核(仅管理员可见)</navigator>
     </view>
 </view>

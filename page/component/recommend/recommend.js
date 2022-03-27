@@ -1,12 +1,12 @@
 Page({
   data: {
-    presentee: {},
-    imgList: [],
-    imgMaxNumber: 4,
-    name: null,
-    admin: "user",
-    uid: null,
-    contact: null
+    presentee: {}, //保存表单除图片以外的字段
+    imgList: [], //图片列表
+    imgMaxNumber: 4, //上传图片的最大数量
+    name: null, //当前登录用户的姓名
+    admin: "user", //当前登录用户的角色
+    uid: null, //当前登录用户的学号
+    contact: null //当前登录用户的联系方式
   },
   onLoad() {
     var self = this;
@@ -86,8 +86,85 @@ Page({
       }
     })
   },
-  uploadImgs(pInfo) {},
-  submit: function () {},
+  uploadImgs(pInfo) {
+    console.log(this.data.imgList)
+    var that = this
+    wxxwx.uploadFile({
+      filePath: this.data.imgList[0],
+      name: 'file',
+      url: 'url', //待定
+      success(res) {
+        console.log(res.data)
+        pInfo['pic'] = res.data
+        that.uploadInfo(pInfo)
+      },
+      fail(res) {
+        console.log(res)
+        //显示消息提示框
+        wx.showToast({
+          title: '上传图片错误', //提示内容
+          icon: 'error' //图标
+        })
+      }
+    })
+  },
+  uploadInfo(info) {
+    var param = info
+    //保存操作者的基本信息
+    param['uid'] = this.data.uid
+    param['name'] = this.data.name
+    param['contact'] = this.data.contact
+    //发起请求
+    wx.request({
+      url: 'url', //待定
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'chartset': 'utf-8'
+      },
+      data: {
+        pinfo: JSON.stringify(param)
+      },
+      success: function (res) {
+        console.log(res)
+        wx.showToast({
+          title: '上传成功，请等待审核结果',
+          icon: 'success'
+        })
+        wx.reLaunch({
+          url: '../vote/vote', //刷新提名页
+        })
+      },
+      fail(res) {
+        console.log(res)
+        wx.showToast({
+          title: '上传失败',
+          icon: 'error'
+        })
+      }
+    })
+  },
+  submit: function () {
+    console.log(this.data.presentee)
+    var pInfo = this.data.presentee
+    var that = this
+    if (pInfo['username'] === '' || pInfo['details'] === '' || pInfo['username'] === undefined || pInfo['details'] === undefined) {
+      wx.showModal({
+        cancelColor: '#999', //取消按钮的文字颜色
+        title: '提示',
+        content: '请填写必填字段'
+      })
+    } else {
+      wx.showModal({
+        cancelColor: '#999',
+        title: '提示',
+        content: '确定提交?',
+        success(res) {
+          //to be continued...
+        }
+      })
+    }
+  },
   clear: function () {
     this.setData({
       presentee: {},
