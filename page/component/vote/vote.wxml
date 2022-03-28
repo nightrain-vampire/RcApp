@@ -5,8 +5,14 @@
     <view class="container">
         <view wx:for="{{cardData}}">
             <view class="card-info">
-                {{item.id}}
-                <navigator url='/page/component/card/card?id={{item.id}}'>查看详情</navigator>
+                <view class="picArea">图片</view>
+                <view class="divLine"></view>
+                <view class="infArea">
+                    <view>{{item.name}}</view>
+                    <view>{{item.uid}}</view>
+                    <view>{{item.votes}}</view>
+                    <navigator url='/page/component/card/card?id={{item.id}}&intro={{item.intro}}'>查看详情</navigator>
+                </view>
             </view>
         </view>
     </view>
