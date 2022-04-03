@@ -1,0 +1,21 @@
+<view class="main">
+    <view class="searchbar">
+        <text>搜索栏to be continued...</text> 
+    </view>
+    <view class="container">
+        <view wx:for="{{cardData}}">
+                <!-- {{item.id}} -->
+            <swiper>
+                <view class="card-info">
+                    <swiper-item wx:for="{{imgUrls}}">
+                        <image src='{{item}}' width="50%" height="80%" mode='widthFix' class='img' />
+                    </swiper-item>
+                </view>
+            </swiper>
+            <navigator url='/page/component/card/card?id={{item.id}}'>查看详情</navigator>
+        </view>
+    </view>
+
+</view>
+
+

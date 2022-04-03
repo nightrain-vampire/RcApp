@@ -1,0 +1,6 @@
+.navbar{
+    position: relative;
+    height: 90rpx;
+    text-align: center;
+    color: #999;
+}

@@ -1,0 +1,27 @@
+<!-- <view class="main">
+    <view>我是{{pid}}</view>
+</view> -->
+
+<view class="page pageShow">
+    <view class="mine-top">
+        <view class="user-photo">
+            <image src="/images/test.jpg"></image>
+            <text>候选人详情(放照片？)</text>
+        </view>
+    </view> 
+    <view class="height"></view>
+    <view class="mine-container">
+       <view class="list">
+           <view class="mine-item">
+            <text>姓名</text> 
+          </view>
+          <view  class="mine-item">
+            <text>介绍</text> 
+          </view>
+          <view class="mine-item">
+            <text>提名理由</text> 
+          </view>
+       </view>
+    </view>
+    
+</view>

@@ -1,0 +1,70 @@
+.container{
+    text-align: center;
+    border-bottom: 20rpx solid #d5e7e4;
+    color: #999;
+    line-height: 90rpx;
+    font-size: 28rpx;
+}
+.Rform{
+    text-align: left;
+    padding: 0;
+    align-items: left;
+    padding-left: 15rpx;
+    position: absolute;
+    top: 13%;
+    left: 6%;
+    background-color: #FdFdFd;
+    width: 85%;
+    height: 83%;
+    border-radius:15rpx;
+    box-shadow: 0px 0px 8rpx #888888;
+    font-size: 26rpx;
+}
+.lineHeight {
+    width: 90%;
+    line-height: 55rpx;
+    margin-left: 5%;
+    padding-top: 5%;
+}
+.lineHeight2{
+    width: 90%;
+    line-height: 55rpx;
+    margin-left: 5%;
+    padding-top: 5%;
+}
+.input{
+    margin-left: 20rpx;
+    display: inline-block;
+    line-height: 80rpx;
+    vertical-align: middle;
+    width: 70%;
+    border: 1rpx solid #D5D5D5;
+    background-color: white;
+    border-radius: 10rpx;
+    padding-left: 10rpx;
+}
+.area{
+    height: 200rpx;
+    position: relative;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 15rpx;
+    background-color: white;
+    padding-left: 25rpx;
+}
+.btns {
+    position: absolute;
+    width: 90%;
+    top: 90%;
+    left: 5%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.clear{
+    color: grey;
+}
+.clear:hover {
+    color: #69207e; 
+    text-decoration: underline;
+}

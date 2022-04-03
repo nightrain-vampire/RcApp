@@ -1,0 +1,44 @@
+<view class="main">
+  <view class="container">
+    <navigator url="/page/component/voterule/voterule">提名规则</navigator>
+  </view>
+
+  <view class="Rform">
+    <view class="lineHeight" type="text">提名名称
+      <input model:value="{{presentee['username']}}" class="input" bindinput="nameInput"></input>
+    </view>
+    <view class="lineHeight2" type="text">提名理由
+      <textarea model:value="{{presentee['details']}}" class="area" bindblur="bindTextAreaBlur"></textarea>
+    </view>
+
+    <form report-submit="true" onsubmit="uploadImgs">
+      <view class="cu-bar bg-white margin-top">
+        <view class="action">
+          图片上传
+        </view>
+        <view class="action">
+          {{imgList.length}}/{{imgMaxNumber}}
+        </view>
+      </view>
+
+      <view class="cu-form-group">
+        <view class="grid col-4 grid-square flex-sub">
+          <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+            <image src='{{imgList[index]}}' mode='aspectFill'></image>
+            <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+              <text class="cuIcon-close"></text>
+            </view>
+          </view>
+          <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<imgMaxNumber}}">
+            <text class="cuIcon-cameraadd"></text>
+          </view>
+        </view>
+      </view>
+    </form>
+
+    <view class="btns">
+      <button size="mini" bindtap="submit" form-type='submit'>提交</button>
+      <text class="clear" bindtap="clear">清空</text>
+    </view>
+  </view>
+</view>
