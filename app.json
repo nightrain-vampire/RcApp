@@ -1,7 +1,7 @@
 {
     "pages": [
-        "page/component/vote/vote",
         "page/component/recommend/recommend",
+        "page/component/vote/vote",
         "page/component/card/card",
         "page/component/user/user",
         "page/component/index/index",
