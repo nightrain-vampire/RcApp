@@ -5,12 +5,18 @@
     <view class="container">
         <view wx:for="{{cardData}}">
             <view class="card-info">
-                <view class="picArea">图片</view>
+                <swiper>
+                    <view class="picArea">
+                        <swiper-item wx:for="{{item.img}}" wx:for-item="img">
+                            <image src='{{img}}' mode="aspectFill"></image>
+                        </swiper-item>
+                    </view>
+                </swiper>
                 <view class="divLine"></view>
                 <view class="infArea">
-                    <view>{{item.name}}</view>
-                    <view>{{item.uid}}</view>
-                    <view>{{item.votes}}</view>
+                    <view>姓名：{{item.name}}</view>
+                    <view>学号：{{item.uid}}</view>
+                    <view>得票：{{item.votes}}</view>
                     <navigator url='/page/component/card/card?id={{item.id}}&intro={{item.intro}}'>查看详情</navigator>
                 </view>
             </view>

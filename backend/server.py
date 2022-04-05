@@ -36,6 +36,6 @@ def getvotes():
         tmplist['name'] = temp[i][2]
         tmplist['intro'] = temp[i][3]
         tmplist['votes'] = temp[i][4]
-        tmplist['img'] = temp[i][5]
+        tmplist['img'] = temp[i][5].split(',')
         res[i] = tmplist
     return res
