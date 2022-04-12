@@ -1,38 +1,53 @@
-<view class="main">
-    <view class="head-bg">
-        <view class="searchbar">
-            <input placeholder="搜索（搜索关键词查找候选人）">
-            <image src="https://pic.imgdb.cn/item/6252f5e4239250f7c5776466.png" class="searchicon"></image>
-            </input>
-        </view>
-        <view class="container">
-            <view wx:for="{{cardData}}" wx:for-index="cid">
-                <view class="card-info">
-                    <view class="picArea">
-                        <swiper class="sitem" current="{{currentIndex[cid]}}" bindanimationfinish="changeFinish" id="{{cid}}">
-                            <swiper-item wx:for="{{item.img}}" wx:for-item="img" catchtouchmove="stopTouchMove">
-                                <image src='{{img}}' mode="aspectFill" style="height: 100%; width: 100%;"></image>
-                            </swiper-item>
-                        </swiper>
-                        <view class="smove">
-                            <view class="controlview">
-                                <image wx:if="{{LeftShow[cid]}}" src="https://pic.imgdb.cn/item/625436ea239250f7c531be0f.png" class="controlimg" id="{{cid}}" bindtap="toLeft"></image>
+<page-meta page-style="overflow: {{visible ? 'visible' : 'hidden'}}">
+    <view class="main">
+        <view class="head-bg">
+            <view class="searchbar">
+                <input placeholder="搜索（搜索关键词查找候选人）">
+                <image src="https://pic.imgdb.cn/item/6252f5e4239250f7c5776466.png" class="searchicon"></image>
+                </input>
+            </view>
+            <view class="container">
+                <view wx:for="{{cardData}}" wx:for-index="cid">
+                    <view class="card-info">
+                        <view class="picArea">
+                            <swiper class="sitem" current="{{currentIndex[cid]}}" bindanimationfinish="changeFinish" id="{{cid}}">
+                                <swiper-item wx:for="{{item.img}}" wx:for-item="img" catchtouchmove="stopTouchMove">
+                                    <image src='{{img}}' mode="aspectFill" style="height: 100%; width: 100%;"></image>
+                                </swiper-item>
+                            </swiper>
+                            <view class="smove">
+                                <view class="controlview">
+                                    <image wx:if="{{LeftShow[cid]}}" src="https://pic.imgdb.cn/item/625436ea239250f7c531be0f.png" class="controlimg" id="{{cid}}" bindtap="toLeft"></image>
+                                </view>
+                                <view class="controlview">
+                                    <image wx:if="{{RightShow[cid]}}" src="https://pic.imgdb.cn/item/6254edfb239250f7c504285b.png" class="controlimg" id="{{cid}}" bindtap="toRight"></image>
+                                </view>
                             </view>
-                            <view class="controlview">
-                                <image wx:if="{{RightShow[cid]}}" src="https://pic.imgdb.cn/item/6254edfb239250f7c504285b.png" class="controlimg" id="{{cid}}" bindtap="toRight"></image>
+                            <view class="inf">
+                                <view class="votes">{{item.votes}}</view>
+                                <view class="votebutt">投票</view>
                             </view>
                         </view>
-                        <view class="inf">
-                            <view class="votes">{{item.votes}}</view>
-                            <view class="votebutt">投票</view>
+                        <view class="infArea">
+                            <view class="infname">{{item.name}}</view>
+                            <view class="infdetail" id="{{cid}}" bindtap="openMask">详情</view>
                         </view>
                     </view>
-                    <view class="infArea">
-                        <view class="infname">{{item.name}}</view>
-                        <view class="infdetail">详情</view>
+                </view>
+            </view>
+            <view class="mask" wx:if="{{maskflag}}" bindtap="closeMask">
+                <view class="detail">
+                    <view class="tophalf">
+                        <view style="font-size: medium;">{{name}}</view>
+                        <view>{{intro}}</view>
+                    </view>
+                    <view class="divLine"></view>
+                    <view class="bottomhalf">
+                        <view style="font-size: medium;">推荐理由</view>
+                        <view>{{reason}}</view>
                     </view>
                 </view>
             </view>
         </view>
     </view>
-</view>
+</page-meta>

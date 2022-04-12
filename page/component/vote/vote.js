@@ -1,16 +1,43 @@
 Page({
   data: {
-      cardData: {},
-      currentIndex: [],
-      LeftShow: [],    //控制左箭头的显示与否
-      RightShow: [],   //控制右箭头的显示与否
-      flag: [],   //按钮是否能调用
-      Plength: []   //每个候选人有多少图片
+    cardData: {},
+    currentIndex: [],
+    LeftShow: [], //控制左箭头的显示与否
+    RightShow: [], //控制右箭头的显示与否
+    flag: [], //按钮是否能调用
+    Plength: [], //每个候选人有多少图片
+    // 用于详情界面的展示
+    maskflag: false,
+    // 属性展示
+    name: '',
+    intro: '',
+    reason: '',
+    // 动态控制页面是否能滑动
+    visible: true
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.getVotes();
   },
-  onPullDownRefresh: function() {
+  openMask: function (e) {
+    var that = this
+    var index = e.target.id
+    var obj =  that.data.cardData[index]
+    that.setData({
+      maskflag: true,
+      visible: false,
+      name: obj.name,
+      intro: obj.intro,
+      reason: '推荐理由'
+    })
+  },
+  closeMask: function () {
+    var that = this
+    that.setData({
+      maskflag: false,
+      visible: true
+    })
+  },
+  onPullDownRefresh: function () {
     wx.reLaunch({
       url: '../vote/vote',
     })
@@ -25,13 +52,13 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded',
         'chartset': 'utf-8'
       },
-      success: function(res) {
+      success: function (res) {
         console.log(res.data)
         var psize = Object.keys(res.data).length
         var tmparray = []
         var tmplength = []
         //数据设置
-        if(Object.keys(res.data).length > 0){
+        if (Object.keys(res.data).length > 0) {
           tmparray = new Array(psize)
           tmplength = new Array(psize)
           var i = 0
@@ -46,11 +73,11 @@ Page({
             RightShow: tmparray,
             currentIndex: Array(psize).fill(0),
             flag: Array(psize).fill(true),
-            Plength: tmplength
+            Plength: tmplength,
           })
           console.log(that.data.Plength)
           console.log(that.data.RightShow)
-        }else {
+        } else {
           wx.showToast({
             title: '目前没有人被提名',
             icon: 'none'
@@ -63,84 +90,84 @@ Page({
     })
   },
   // 阻止用户手动滑动
-  stopTouchMove: function() {
+  stopTouchMove: function () {
     return false;
   },
   //动画全部完成
-  changeFinish: function(e) {
+  changeFinish: function (e) {
     var that = this
-    var index = e.target.id     //获取是哪个card滑完了
+    var index = e.target.id //获取是哪个card滑完了
     that.setData({
-      ['flag[' + index + ']'] : true
+      ['flag[' + index + ']']: true
     })
     console.log(that.data.flag[index])
   },
   //左滑控制
-  toLeft: function(e) {
+  toLeft: function (e) {
     var that = this
-    var index = e.target.id     //获取是哪个card调用了
+    var index = e.target.id //获取是哪个card调用了
     // 动画还未完成，不执行
     if (!that.data.flag[index]) {
       return
     } else {
       // 修改按钮为不可用
       that.setData({
-        ['flag[' + index + ']'] : false
+        ['flag[' + index + ']']: false
       })
       console.log(that.data.flag[index])
-      var id = that.data.currentIndex[index]    //获取当前卡片的索引
+      var id = that.data.currentIndex[index] //获取当前卡片的索引
       // 是否解放右按钮
-      if((!that.data.RightShow[index]) && id < that.data.Plength[index]){
+      if ((!that.data.RightShow[index]) && id < that.data.Plength[index]) {
         that.setData({
-          ['RightShow[' + index + ']'] : true
+          ['RightShow[' + index + ']']: true
         })
         console.log(that.data.RightShow[index])
       }
       // 是否隐藏左按钮
-      if((that.data.LeftShow[index]) && id == 1){
+      if ((that.data.LeftShow[index]) && id == 1) {
         that.setData({
-          ['LeftShow[' + index + ']'] : false
+          ['LeftShow[' + index + ']']: false
         })
         console.log(that.data.LeftShow[index])
       }
       // 下一页
       that.setData({
-        ['currentIndex[' + index + ']'] : id - 1
+        ['currentIndex[' + index + ']']: id - 1
       })
       console.log(that.data.currentIndex[index])
     }
   },
   //右滑控制
-  toRight: function(e) {
+  toRight: function (e) {
     var that = this
-    var index = e.target.id     //获取是哪个card调用了
+    var index = e.target.id //获取是哪个card调用了
     // 动画还未完成，不执行
     if (!that.data.flag[index]) {
       return
     } else {
       // 修改按钮为不可用
       that.setData({
-        ['flag[' + index + ']'] : false
+        ['flag[' + index + ']']: false
       })
       console.log(that.data.flag[index])
-      var id = that.data.currentIndex[index]    //获取当前卡片的索引
+      var id = that.data.currentIndex[index] //获取当前卡片的索引
       // 是否解放左按钮
-      if(id == 0){
+      if (id == 0) {
         that.setData({
-          ['LeftShow[' + index + ']'] : true
+          ['LeftShow[' + index + ']']: true
         })
         console.log(that.data.LeftShow[index])
       }
       // 是否隐藏右按钮
-      if(id == that.data.Plength[index]-2){
+      if (id == that.data.Plength[index] - 2) {
         that.setData({
-          ['RightShow[' + index + ']'] : false
+          ['RightShow[' + index + ']']: false
         })
         console.log(that.data.RightShow[index])
       }
       // 下一页
       that.setData({
-        ['currentIndex[' + index + ']'] : id + 1
+        ['currentIndex[' + index + ']']: id + 1
       })
       console.log(that.data.currentIndex[index])
     }
