@@ -1,37 +1,130 @@
 .card-info {
     flex-shrink: 0;
     box-sizing: border-box;
-    padding: 10px;
-    width: 350rpx;
-    height: 600rpx;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    /* position: relative; */
-    margin-left: 7px;
-    margin-bottom: 10px;
+    width: 675rpx;
+    height: 500rpx;
+    margin-bottom: 20px;
     background-color: #FdFdFd;
-    border-radius:15rpx;
+    /* border-radius:15rpx; */
     box-shadow: 0px 0px 8rpx #888888;
     font-size: 26rpx;
 }
 
 .container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
 .picArea{
-    height: 300rpx;
+    position: relative;
+    width: auto;
+    height: 420rpx;
 }
 
-.divLine{
-    background: cadetblue;
+.inf {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 13rpx;
+    transform: translateY(-110rpx); 
+}
+
+.votes {
+    color: white;
+    font-size: xx-large;
+    font-weight: 450;
+}
+
+.votebutt {
+    border: 4rpx solid #c70b1a;
+    border-radius: 0.8em;
+    padding: 0rpx 13rpx;
+    font-size: large;
+    font-weight: 600;
+    color: white;
+    background-color: #c70b1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.smove {
+    height: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 25rpx;
+    transform: translateY(-260rpx);
+}
+
+.controlview {
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.controlimg {
     width: 100%;
-    height: 5rpx;
+    height: 100%;
+}
+
+.sitem {
+    height: 100%;
 }
 
 .infArea{
-    padding: 10px;
+    padding: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infname {
+    float: left;
+}
+
+.infdetail {
+    border: 4rpx solid darkgray;
+    border-radius: 0.8em;
+    padding: 10rpx 15rpx;
+    font-size: small;
+    color: darkgray;
+    transform: translateY(-12rpx);
+}
+
+.head-bg {
+    background-image: url(https://pic.imgdb.cn/item/6252e69b239250f7c55842fd.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.searchbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-top: 25px;
+}
+
+.searchicon {
+    width: 70rpx;
+    height: 70rpx;
+    float: right;
+    transform: translateX(-20rpx) translateY(-73rpx);
+}
+
+input {
+    font-size: 30rpx;
+    text-align: center;
+    border: 1rpx solid #D5D5D5;
+    background-color: white;
+    border-radius: 40rpx;
+    width: 675rpx;
+    height: 75rpx;
+    float: left;
 }

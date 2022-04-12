@@ -1,40 +1,17 @@
 {
     "pages": [
-        "page/component/recommend/recommend",
+        "page/component/index/index",
         "page/component/vote/vote",
+        "page/component/recommend/recommend",
         "page/component/card/card",
         "page/component/user/user",
-        "page/component/index/index",
         "page/component/voterule/voterule",
         "page/component/history/history",
-        "page/component/admin/admin"
+        "page/component/admin/admin",
+        "page/component/myrecommend/myrecommend"
     ],
     "window": {
-        "navigationBarTextStyle": "white",
-        "navigationBarTitleText": "主页",
-        "navigationBarBackgroundColor": "#69c4aa",
-        "backgroundColor": "#eeeeee",
-        "enablePullDownRefresh": true
-    },
-    "tabBar": {
-        "color": "#b7b7b7",
-        "selectedColor": "#69c4aa",
-        "borderStyle": "white",
-        "backgroundColor": "#f5f5f5",
-        "list": [
-            {
-                "pagePath": "page/component/vote/vote",
-                "text": "投票"
-            },
-            {
-                "pagePath": "page/component/recommend/recommend",
-                "text": "提名"
-            },
-            {
-                "pagePath": "page/component/user/user",
-                "text": "我的"
-            }
-        ]
+        "navigationBarBackgroundColor": "#111125"
     },
     "networkTimeout": {
         "request": 60000,

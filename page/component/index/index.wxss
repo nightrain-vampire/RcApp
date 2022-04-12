@@ -1,0 +1,23 @@
+.head-bg {
+    background-image: url(https://pic.imgdb.cn/item/6252842d239250f7c584d968.png);
+    width:100%;
+    height:100vh;
+    background-size: 100% 100%;  
+}
+
+.nav-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60vh;
+}
+
+.nav {
+    width: 50%;
+    height: 12vh;
+}
+
+.bimg {
+    height: 12vh;
+}

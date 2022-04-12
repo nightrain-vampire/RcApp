@@ -37,7 +37,7 @@
     display: inline-block;
     line-height: 80rpx;
     vertical-align: middle;
-    width: 70%;
+    width: 60%;
     border: 1rpx solid #D5D5D5;
     background-color: white;
     border-radius: 10rpx;

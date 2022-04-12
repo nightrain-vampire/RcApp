@@ -51,6 +51,9 @@ Page({
   nameInput: function (e) {
     this.data.presentee['username'] = e.detail.value;
   },
+  uidInput: function (e) {
+    this.data.presentee['rid'] = e.detail.value;
+  },
   bindTextAreaBlur: function (e) {
     this.data.presentee['details'] = e.detail.value;
   },

@@ -4,8 +4,11 @@
   </view>
 
   <view class="Rform">
-    <view class="lineHeight" type="text">提名名称
+    <view class="lineHeight" type="text">提名对象名称
       <input model:value="{{presentee['username']}}" class="input" bindinput="nameInput"></input>
+    </view>
+    <view class="lineHeight" type="text">提名对象学号
+      <input model:value="{{presentee['rid']}}" class="input" bindinput="uidInput"></input>
     </view>
     <view class="lineHeight2" type="text">提名理由
       <textarea model:value="{{presentee['details']}}" class="area" bindblur="bindTextAreaBlur"></textarea>
