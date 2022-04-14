@@ -75,3 +75,17 @@ def uploadInfo():
     cur.close()
     conn.close()
     return 'success'
+
+
+# 投票
+@app.route('/vote', methods=['POST'])
+def vote():
+    id = request.form.get('card')
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "update vote set votes = votes + 1 where id = %s"
+    cur.execute(sql,id)
+    conn.commit()
+    cur.close()
+    conn.close()
+    return 'success'

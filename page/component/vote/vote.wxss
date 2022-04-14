@@ -115,7 +115,7 @@
     width: 70rpx;
     height: 70rpx;
     float: right;
-    transform: translateX(-20rpx) translateY(-73rpx);
+    transform: translateX(-45rpx);
 }
 
 input {
@@ -127,6 +127,7 @@ input {
     width: 675rpx;
     height: 75rpx;
     float: left;
+    transform: translateX(5%);
 }
 
 .mask {

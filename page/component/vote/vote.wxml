@@ -2,9 +2,8 @@
     <view class="main">
         <view class="head-bg">
             <view class="searchbar">
-                <input placeholder="搜索（搜索关键词查找候选人）">
-                <image src="https://pic.imgdb.cn/item/6252f5e4239250f7c5776466.png" class="searchicon"></image>
-                </input>
+                <input placeholder="搜索（搜索关键词查找候选人）" model:value = "{{searchkey}}" bindinput="searchInput"></input>
+                <image src="https://pic.imgdb.cn/item/6252f5e4239250f7c5776466.png" class="searchicon" bindtap="search" ></image>
             </view>
             <view class="container">
                 <view wx:for="{{cardData}}" wx:for-index="cid">
@@ -25,7 +24,7 @@
                             </view>
                             <view class="inf">
                                 <view class="votes">{{item.votes}}</view>
-                                <view class="votebutt">投票</view>
+                                <view class="votebutt" id="{{cid}}" bindtap="vote">投票</view>
                             </view>
                         </view>
                         <view class="infArea">

@@ -13,7 +13,9 @@ Page({
     intro: '',
     reason: '',
     // 动态控制页面是否能滑动
-    visible: true
+    visible: true,
+    // 搜索内容
+    searchkey: ''
   },
   onLoad: function (options) {
     this.getVotes();
@@ -21,7 +23,7 @@ Page({
   openMask: function (e) {
     var that = this
     var index = e.target.id
-    var obj =  that.data.cardData[index]
+    var obj = that.data.cardData[index]
     that.setData({
       maskflag: true,
       visible: false,
@@ -171,5 +173,43 @@ Page({
       })
       console.log(that.data.currentIndex[index])
     }
+  },
+  // 投票
+  vote: function (e) {
+    var that = this
+    var index = e.target.id //获取是哪个card调用了
+    var obj = that.data.cardData[index] //获取对象
+    var cur = obj.votes //获取当前投票数
+    wx.request({
+      url: 'http://127.0.0.1:5000/vote',
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'chartset': 'utf-8'
+      },
+      data: {
+        card: obj.id
+      },
+      success: function (res) {
+        that.setData({
+          ['cardData.' + index + '.votes']: cur + 1
+        })
+      },
+      fail: res => {
+        console.log('投票失败')
+      }
+    })
+  },
+  // 搜索
+  searchInput: function (e) {
+    var that = this
+    that.data.searchkey = e.detail.value
+  },
+  search: function (e) {
+    var that = this
+    console.log(that.data.searchkey)
+    that.setData({
+      searchkey: ''
+    })
   }
 })
