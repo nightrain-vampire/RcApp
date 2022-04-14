@@ -89,3 +89,28 @@ def vote():
     cur.close()
     conn.close()
     return 'success'
+
+
+# 搜索
+@app.route('/searchkey', methods=['POST'])
+def search():
+    key = request.form.get('key')
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "select * from vote where name = %s order by votes desc"
+    cur.execute(sql, key)
+    temp = cur.fetchall()
+    cur.close()
+    conn.close()
+    res = {}
+    for i in range(len(temp)):
+        tmplist = {}
+        tmplist['id'] = temp[i][0]
+        tmplist['uid'] = temp[i][1]
+        tmplist['name'] = temp[i][2]
+        tmplist['intro'] = temp[i][3]
+        tmplist['votes'] = temp[i][4]
+        tmplist['img'] = temp[i][5].split(',')
+        res[i] = tmplist
+    print(res)
+    return res

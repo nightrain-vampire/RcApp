@@ -207,6 +207,59 @@ Page({
   },
   search: function (e) {
     var that = this
+    if (that.data.searchkey == '' || that.data.searchkey === undefined) {
+      wx.showToast({
+        title: '请输入关键词',
+        icon: 'none'
+      })
+    } else {
+      wx.request({
+        url: 'http://127.0.0.1:5000/searchkey',
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'chartset': 'utf-8'
+        },
+        data: {
+          key: that.data.searchkey
+        },
+        success: function (res) {
+          console.log(res.data)
+          var psize = Object.keys(res.data).length
+          var tmparray = []
+          var tmplength = []
+          //数据设置
+          if (Object.keys(res.data).length > 0) {
+            tmparray = new Array(psize)
+            tmplength = new Array(psize)
+            var i = 0
+            for (var key in res.data) {
+              tmplength[i] = res.data[key]['img'].length
+              tmparray[i] = (tmplength[i] > 1)
+              i = i + 1
+            }
+            that.setData({
+              cardData: res.data,
+              LeftShow: Array(psize).fill(false),
+              RightShow: tmparray,
+              currentIndex: Array(psize).fill(0),
+              flag: Array(psize).fill(true),
+              Plength: tmplength,
+            })
+            console.log(that.data.Plength)
+            console.log(that.data.RightShow)
+          } else {
+            wx.showToast({
+              title: '无搜索结果',
+              icon: 'none'
+            })
+          }
+        },
+        fail: function (res) {
+          console.log('搜索失败', res)
+        }
+      })
+    }
     console.log(that.data.searchkey)
     that.setData({
       searchkey: ''
