@@ -1,0 +1,41 @@
+<view class="main">
+    <view class="head-bg">
+        <view class="userArea">
+            <view class="avatar">
+                <image src="{{avatar}}" style="width: 100%; height: 100%;"></image>
+            </view>
+            <view class="infArea">
+                <view class="un">{{username}}</view>
+                <view class="un2">{{subtitle}}</view>
+            </view>
+        </view>
+        <view class="divLine">
+            <image src="https://pic.imgdb.cn/item/62581516239250f7c53ca506.png" style="width: 100%; height: 100%;"></image>
+        </view>
+        <view class="cardArea">
+            <view wx:for="{{cardData}}" wx:for-index="cid">
+                <view class="card-info">
+                    <view class="picArea">
+                        <swiper class="sitem" current="{{currentIndex[cid]}}" bindanimationfinish="changeFinish" id="{{cid}}">
+                            <swiper-item wx:for="{{item.img}}" wx:for-item="img" catchtouchmove="stopTouchMove">
+                                <image src='{{img}}' mode="aspectFill" style="height: 100%; width: 100%;"></image>
+                            </swiper-item>
+                        </swiper>
+                        <view class="smove">
+                            <view class="controlview">
+                                <image wx:if="{{LeftShow[cid]}}" src="https://pic.imgdb.cn/item/625436ea239250f7c531be0f.png" class="controlimg" id="{{cid}}" bindtap="toLeft"></image>
+                            </view>
+                            <view class="controlview">
+                                <image wx:if="{{RightShow[cid]}}" src="https://pic.imgdb.cn/item/6254edfb239250f7c504285b.png" class="controlimg" id="{{cid}}" bindtap="toRight"></image>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bottomArea">
+                        <view class="infname">{{item.name}}</view>
+                        <view class="infdetail" id="{{cid}}">修改</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

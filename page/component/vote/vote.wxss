@@ -99,7 +99,9 @@
     background-image: url(https://pic.imgdb.cn/item/6252e69b239250f7c55842fd.png);
     width: 100%;
     height: 100%;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #111125;
 }
 
 .searchbar {
