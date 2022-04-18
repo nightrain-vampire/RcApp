@@ -14,6 +14,7 @@ Page({
     name: '',
     intro: '',
     reason: '',
+    detailData: [],
     // 动态控制页面是否能滑动
     visible: true,
     // 搜索内容
@@ -72,7 +73,8 @@ Page({
       visible: false,
       name: obj.name,
       intro: obj.intro,
-      reason: obj.reason
+      reason: obj.reason,
+      detailData: obj.img
     })
   },
   closeMask: function () {

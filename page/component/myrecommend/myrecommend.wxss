@@ -8,9 +8,10 @@
 }
 
 .avatar {
-    width: 200rpx;
-    height: 200rpx;
+    width: 180rpx;
+    height: 180rpx;
     border-radius: 50rpx;
+    padding-right: 10rpx;
 }
 
 .userArea {
@@ -18,7 +19,7 @@
     flex-direction: row;
     align-items: bottom;
     padding: 50rpx 60rpx;
-    transform: translateX(15rpx);
+    transform: translateX(25rpx) translateY(10rpx);
 }
 
 .infArea {
