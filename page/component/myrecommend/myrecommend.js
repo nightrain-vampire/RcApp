@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
     data: {
         avatar: '../../../images/avatar.png',
@@ -9,19 +11,32 @@ Page({
         RightShow: [], //控制右箭头的显示与否
         flag: [], //按钮是否能调用
         Plength: [], //每个候选人有多少图片
+        // 用户信息
+        username: '',
+        uid: '',
+        userid: ''
     },
     onLoad: function () {
-        this.getVotes();
+        var that = this;
+        that.setData({
+            userid: app.globalData.userid,
+            uid: app.globalData.uid,
+            username: app.globalData.username
+        })
+        that.getMyVotes();
     },
-    getVotes() {
+    getMyVotes() {
         var that = this
         //向后端接口发请求
         wx.request({
-            url: 'http://127.0.0.1:5000/getvotes',
+            url: 'http://127.0.0.1:5000/getmyvotes',
             method: "POST",
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'chartset': 'utf-8'
+            },
+            data: {
+                id : that.data.userid
             },
             success: function (res) {
                 console.log(res.data)

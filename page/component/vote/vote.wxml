@@ -37,13 +37,15 @@
             <view class="mask" wx:if="{{maskflag}}" bindtap="closeMask">
                 <view class="detail">
                     <view class="tophalf">
-                        <view style="font-size: medium;">{{name}}</view>
-                        <view>{{intro}}</view>
+                        <view class="depic"></view>
+                        <view style="font-size: large; font-weight: 600;">{{name}}</view>
+                        <view style="word-break: keep-all; word-wrap: break-word; white-space: pre-line; font-weight: 300;">{{intro}}</view>
                     </view>
                     <view class="divLine"></view>
+                    <view class="divLine2"></view>
                     <view class="bottomhalf">
-                        <view style="font-size: medium;">推荐理由</view>
-                        <view>{{reason}}</view>
+                        <view style="font-size: medium; font-weight: 600;">推荐理由</view>
+                        <view style="word-break: keep-all; word-wrap: break-word; white-space: pre-line; font-weight: 300;">{{reason}}</view>
                     </view>
                 </view>
             </view>

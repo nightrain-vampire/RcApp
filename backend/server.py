@@ -3,6 +3,7 @@ from email import charset
 from flask import Flask, request, jsonify
 import json
 import pymysql
+import datetime
 
 user = 'root'
 password = ''
@@ -12,6 +13,8 @@ host = '127.0.0.1'
 port = 3316         # 连不上的话可以康康端口号对不对
 
 app = Flask(__name__)
+
+Nominee_State = ['草稿', '待审核', '已通过', '已拒绝']
 
 @app.route('/')
 def index():
@@ -23,7 +26,7 @@ def index():
 def getvotes():
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
-    sql = "select * from vote order by votes desc"
+    sql = "select * from nominee where state = 2 order by votes desc"
     cur.execute(sql)
     temp = cur.fetchall()
     # print(temp[1][1])
@@ -34,12 +37,55 @@ def getvotes():
     for i in range(len(temp)):
         tmplist = {}
         tmplist['id'] = temp[i][0]
-        tmplist['uid'] = temp[i][1]
+        # tmplist['uid'] = temp[i][1]
         tmplist['name'] = temp[i][2]
         tmplist['intro'] = temp[i][3]
         tmplist['votes'] = temp[i][4]
         tmplist['img'] = temp[i][5].split(',')
+        tmplist['reason'] = temp[i][7]
         res[i] = tmplist
+    print(res)
+    return res
+
+
+# 获取某个用户的所有提名
+@app.route('/getmyvotes', methods=['POST'])
+def getmyvotes():
+    userid = request.form.get('id')
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "select * from nominee where userid = %s"
+    cur.execute(sql,userid)
+    temp = cur.fetchall()
+    cur.close()
+    conn.close()
+    res = {}
+    for i in range(len(temp)):
+        tmplist = {}
+        tmplist['id'] = temp[i][0]
+        tmplist['name'] = temp[i][2]
+        tmplist['intro'] = temp[i][3]
+        tmplist['votes'] = temp[i][4]
+        tmplist['img'] = temp[i][5].split(',')
+        tmplist['state'] = Nominee_State[int(temp[i][6])]
+        res[i] = tmplist
+    print(res)
+    return res
+
+
+# 获取剩余票数
+@app.route('/getleft', methods=['POST'])
+def getLeft():
+    key = request.form.get('key')
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "select leftvotes from user where id = %s"
+    cur.execute(sql, key)
+    temp = cur.fetchall()
+    cur.close()
+    conn.close()
+    res = {}
+    res['leftvotes'] = temp[0][0]
     print(res)
     return res
 
@@ -81,10 +127,21 @@ def uploadInfo():
 @app.route('/vote', methods=['POST'])
 def vote():
     id = request.form.get('card')
+    userid = request.form.get('votes')
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
-    sql = "update vote set votes = votes + 1 where id = %s"
+    # 更新票数
+    sql = "update nominee set votes = votes + 1 where id = %s"
     cur.execute(sql,id)
+    conn.commit()
+    # 更新投票记录
+    sql = "insert into votes(userid,ip,Nomineeid,vote_time) values(%s,%s,%s,%s)"
+    coolection_time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
+    cur.execute(sql,(userid,request.remote_addr,id,coolection_time))
+    conn.commit()
+    # 更新剩余票数
+    sql = "update user set leftvotes = leftvotes - 1 where id = %s"
+    cur.execute(sql,userid)
     conn.commit()
     cur.close()
     conn.close()
@@ -97,7 +154,7 @@ def search():
     key = request.form.get('key')
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
-    sql = "select * from vote where name = %s order by votes desc"
+    sql = "select * from nominee where name = %s and state = 2 order by votes desc"
     cur.execute(sql, key)
     temp = cur.fetchall()
     cur.close()
@@ -106,7 +163,7 @@ def search():
     for i in range(len(temp)):
         tmplist = {}
         tmplist['id'] = temp[i][0]
-        tmplist['uid'] = temp[i][1]
+        # tmplist['uid'] = temp[i][1]
         tmplist['name'] = temp[i][2]
         tmplist['intro'] = temp[i][3]
         tmplist['votes'] = temp[i][4]

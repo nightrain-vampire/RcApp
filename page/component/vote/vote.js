@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     cardData: {},
@@ -15,10 +17,51 @@ Page({
     // 动态控制页面是否能滑动
     visible: true,
     // 搜索内容
-    searchkey: ''
+    searchkey: '',
+    // 用户信息
+    username: '',
+    uid: '',
+    leftvotes: '',
+    userid: ''
   },
   onLoad: function (options) {
+    this.getLeft();
     this.getVotes();
+  },
+  getLeft: function () {
+    var that = this
+    that.setData({
+      username: app.globalData.username,
+      uid: app.globalData.uid,
+      userid: app.globalData.userid
+    })
+    wx.request({
+      url: 'http://127.0.0.1:5000/getleft',
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'chartset': 'utf-8'
+      },
+      data: {
+        key: app.globalData.userid
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          leftvotes: res.data.leftvotes
+        })
+        if (that.data.leftvotes == 0) {
+          wx.showToast({
+            title: '今日投票次数用完',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function () {
+        console.log('出现小bug...')
+      }
+    })
+    console.log(that.data.leftvotes)
   },
   openMask: function (e) {
     var that = this
@@ -29,7 +72,7 @@ Page({
       visible: false,
       name: obj.name,
       intro: obj.intro,
-      reason: '推荐理由'
+      reason: obj.reason
     })
   },
   closeMask: function () {
@@ -180,25 +223,35 @@ Page({
     var index = e.target.id //获取是哪个card调用了
     var obj = that.data.cardData[index] //获取对象
     var cur = obj.votes //获取当前投票数
-    wx.request({
-      url: 'http://127.0.0.1:5000/vote',
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'chartset': 'utf-8'
-      },
-      data: {
-        card: obj.id
-      },
-      success: function (res) {
-        that.setData({
-          ['cardData.' + index + '.votes']: cur + 1
-        })
-      },
-      fail: res => {
-        console.log('投票失败')
-      }
-    })
+    var curleft = that.data.leftvotes //获取当前剩余票数
+    if (curleft > 0) {
+      wx.request({
+        url: 'http://127.0.0.1:5000/vote',
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'chartset': 'utf-8'
+        },
+        data: {
+          card: obj.id,
+          votes: that.data.userid
+        },
+        success: function (res) {
+          that.setData({
+            ['cardData.' + index + '.votes']: cur + 1,
+            leftvotes: curleft - 1
+          })
+        },
+        fail: res => {
+          console.log('投票失败')
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '今日投票次数用完',
+        icon: 'none'
+      })
+    }
   },
   // 搜索
   searchInput: function (e) {

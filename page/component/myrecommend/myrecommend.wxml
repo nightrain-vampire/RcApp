@@ -6,7 +6,7 @@
             </view>
             <view class="infArea">
                 <view class="un">{{username}}</view>
-                <view class="un2">{{subtitle}}</view>
+                <view class="un2">{{uid}}</view>
             </view>
         </view>
         <view class="divLine">
@@ -32,6 +32,7 @@
                     </view>
                     <view class="bottomArea">
                         <view class="infname">{{item.name}}</view>
+                        <view class="infstate">{{item.state}}</view>
                         <view class="infdetail" id="{{cid}}">修改</view>
                     </view>
                 </view>
