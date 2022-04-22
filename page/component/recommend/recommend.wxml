@@ -17,7 +17,7 @@
 
 
     <view class="photo_upload-area">
-      <image src="https://pic.imgdb.cn/item/625a6eae239250f7c5995a54.png" mode="aspectFit" class="photo_upload_bg_bimg" ></image>
+      <image src="https://pic.imgdb.cn/item/625a6eae239250f7c5995a54.png" mode="scaleToFill" class="photo_upload_bg_bimg" ></image>
       <!-- <view class="photo_upload_bimg"> -->
         <view class="Rform">
           <form report-submit="true" onsubmit="uploadImgs">
