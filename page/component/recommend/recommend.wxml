@@ -22,9 +22,12 @@
         <view class="Rform">
           <form report-submit="true" onsubmit="uploadImgs">
             <view class="cu-bar margin-top">
-              <!-- <view class="action">
+              <view class="action">
+                <text class = "upload_restriction">照片上传(1-4张)</text>
+              </view>
+              <view class="photo_number">
                 {{imgList.length}}/{{imgMaxNumber}}
-              </view> -->
+              </view>
             </view>
             <view class="cu-form-group">
               <view class="grid col-4 grid-square flex-sub">

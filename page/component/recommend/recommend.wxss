@@ -60,26 +60,40 @@
     justify-content: center;
     align-items: center;
     /* padding-top: 21.5vh; */
-    padding-top: 70.6px;
+    padding-top: 72.6px;
 }
 
 .photo_upload_bg_bimg{
     display:flex;
-    height: 136px;
-    width: 356px;
+    height: 130px;
+    width: 354px;
     /* width: 93%; */
 }
 
 .photo_upload_bimg{
     position: absolute;
 }
+.action{
+    padding-top:28.5px;
+}
+.upload_restriction{
+    font-size:18.5px;
+    font-weight: bold;
+    font-family: Hei;
+}
+
+.photo_number{
+    font-size:18px;
+    padding-top:30px;
+}
+
 
 .info-area{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 69px;
+    padding-top: 70px;
 }
 
 .info_bimg {
@@ -92,7 +106,7 @@
     justify-content: center;
     align-items: center;
     /* padding-top: 1px; */
-    padding-top: 73px;
+    padding-top: 74px;
 }
 
 .button_bimg {
