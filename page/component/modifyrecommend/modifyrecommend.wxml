@@ -1,2 +1,67 @@
 <!--page/component/modifyrecommend.wxml-->
-<text>page/component/modifyrecommend.wxml</text>
+<!-- <text>page/component/modifyrecommend.wxml</text> -->
+
+<view class="main">
+  <view class="modi_recommend-bg">
+    <view class="name-area">
+        <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993dd2.png" mode="aspectFit" class="name_bimg" ></image>
+        <view class ="name_input_bimg">
+          <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="" auto-focus="true" />
+        </view>
+    </view>
+      
+    <view class="reason-area">
+      <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993de3.png" mode="aspectFit" class="reason_bimg" ></image>
+      <view class ="reason_bimg">
+        <!-- <input bindinput="bindKeyInput" placeholder="请输入理由"/> -->
+        <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="请输入理由" auto-focus="true" />
+      </view>
+    </view>
+
+
+    <view class="photo_upload-area">
+      <image src="https://pic.imgdb.cn/item/625a6eae239250f7c5995a54.png" mode="scaleToFill" class="photo_upload_bg_bimg" ></image>
+      <!-- <view class="photo_upload_bimg"> -->
+        <view class="Rform">
+          <form report-submit="true" onsubmit="uploadImgs">
+            <view class="cu-bar margin-top">
+              <view class="action">
+                <text class = "upload_restriction">照片上传(1-4张)</text>
+              </view>
+              <view class="photo_number">
+                {{imgList.length}}/{{imgMaxNumber}}
+              </view>
+            </view>
+            <view class="cu-form-group">
+              <view class="grid col-4 grid-square flex-sub">
+                <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+                  <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                  <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                    <text class="cuIcon-close"></text>
+                  </view>
+                </view>
+                <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<imgMaxNumber}}">
+                  <text class="cuIcon-cameraadd"></text>
+                </view>
+              </view>
+            </view>
+          </form>
+        </view>
+
+      <!-- </view> -->
+
+    </view>
+
+    <view class="info-area"> 
+      <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993deb.png" mode="aspectFit" class="info_bimg" ></image>
+      <view class ="info_bimg">
+        <!-- <input bindinput="bindKeyInput" placeholder="输入信息"/> -->
+        <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="请输入信息" auto-focus="true" />
+      </view>
+    </view>
+
+    <navigator url="/page/component/myrecommend/myrecommend" class="button-area">
+      <image src="https://pic.imgdb.cn/item/62636f10239250f7c5778081.png" mode="aspectFit" class="button_bimg" ></image>
+    </navigator>
+  </view>
+</view>
