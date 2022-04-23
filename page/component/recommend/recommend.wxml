@@ -57,7 +57,7 @@
       </view>
     </view>
 
-    <navigator url="/page/component/myrecommend/myrecommend" class="button-area">
+    <navigator url="/page/component/modifyrecommend/modifyrecommend" class="button-area">
       <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993dc5.png" mode="aspectFit" class="button_bimg" ></image>
     </navigator>
   </view>
