@@ -12,14 +12,14 @@
     <view class="name-area">
       <view class="name-box">
         <view class="name-title">提名名称:</view>
-        <input placeholder="(团体/个人的名称)" model:value="{{presentee['rname']}}" bindinput="nameInput" class="name-input"></input>
+        <input placeholder="(团体/个人的名称)" bindinput="nameInput" class="name-input"></input>
       </view>
     </view>
 
     <view class="reason-area">
       <view class="reason-box">
         <view class="reason-title">提名人理由:</view>
-        <textarea model:value="{{presentee['reason']}}" bindblur="reasonBlur" class="reason-input" />
+        <textarea bindinput="reasonBlur" class="reason-input" />
       </view>
     </view>
 
@@ -46,7 +46,7 @@
     <view class="info-area">
       <view class="info-box">
         <view class="reason-title">提名人信息:</view>
-        <textarea model:value="{{presentee['details']}}" bindblur="bindTextAreaBlur" class="info-input" />
+        <textarea bindinput="bindTextAreaBlur" class="info-input" />
       </view>
     </view>
 

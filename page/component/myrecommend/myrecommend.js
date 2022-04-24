@@ -72,7 +72,7 @@ Page({
                     console.log(that.data.RightShow)
                 } else {
                     wx.showToast({
-                        title: '目前没有人被提名',
+                        title: '目前没有提名',
                         icon: 'none'
                     })
                 }

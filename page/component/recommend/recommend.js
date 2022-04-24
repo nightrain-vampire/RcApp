@@ -47,12 +47,15 @@ Page({
   // },
   nameInput: function (e) {
     this.data.presentee['rname'] = e.detail.value;
+    console.log(this.data.presentee['rname'])
   },
   reasonBlur: function (e) {
     this.data.presentee['reason'] = e.detail.value;
+    console.log(this.data.presentee['reason'])
   },
   bindTextAreaBlur: function (e) {
     this.data.presentee['details'] = e.detail.value;
+    console.log(this.data.presentee['details'])
   },
   ChooseImage() {
     //从本地相册选择图片或使用相机拍照

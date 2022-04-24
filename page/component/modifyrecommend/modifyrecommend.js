@@ -33,7 +33,39 @@ Page({
       username: app.globalData.username,
       targetid: option.id
     })
+    that.getCurrent(option.id)
   },
+  getCurrent(Id) {
+    var that = this;
+    var id = Id
+    wx.request({
+      url: 'http://127.0.0.1:5000/getcurrent',
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'chartset': 'utf-8'
+      },
+      data: {
+        id: id
+      },
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          presentee: {
+            rname: res.data.name,
+            reason: res.data.reason,
+            details: res.data.intro,
+          },
+          imgList: res.data.img
+        })
+        console.log(that.data.presentee)
+        console.log(that.data.imgList)
+      },
+      fail: function() {
+        console.log('出现小bug')
+      }
+    })
+  }, 
   //主要是检查有无完善联系方式
   // checkName: function () {
   //   if (this.data.contact == null) {

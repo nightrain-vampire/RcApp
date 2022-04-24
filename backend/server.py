@@ -1,5 +1,6 @@
 import base64
 from email import charset
+from time import time
 from flask import Flask, request, jsonify
 import json
 import pymysql
@@ -73,19 +74,49 @@ def getmyvotes():
     return res
 
 
+# 获取当前要修改的人的信息
+@app.route('/getcurrent', methods=['POST'])
+def getcurrent():
+    id = request.form.get('id')
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "select * from nominee where id = %s"
+    cur.execute(sql,id)
+    temp = cur.fetchall()
+    print(temp)
+    cur.close()
+    conn.close()
+    res = {}
+    res['id'] = temp[0][0]
+    res['name'] = temp[0][2]
+    res['intro'] = temp[0][3]
+    res['votes'] = temp[0][4]
+    res['img'] = temp[0][5].split(',')
+    res['reason'] = temp[0][7]
+    return res
+    
+
 # 获取剩余票数
 @app.route('/getleft', methods=['POST'])
 def getLeft():
     key = request.form.get('key')
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
-    sql = "select leftvotes from user where id = %s"
+    sql = "select leftvotes,lastvotetime from user where id = %s"
     cur.execute(sql, key)
     temp = cur.fetchall()
-    cur.close()
-    conn.close()
+    last_time = str(temp[0][1])
+    current_time = str(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d'))
     res = {}
     res['leftvotes'] = temp[0][0]
+    # 如果上一次投票时间是昨天或者更早，刷新剩余票数
+    if current_time > last_time:
+        sql = "update user set leftvotes = 10 where id = %s"
+        cur.execute(sql, key)
+        conn.commit()
+        res['leftvotes'] = 10
+    cur.close()
+    conn.close()
     print(res)
     return res
 
@@ -149,9 +180,10 @@ def vote():
     coolection_time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
     cur.execute(sql,(userid,request.remote_addr,id,coolection_time))
     conn.commit()
-    # 更新剩余票数
-    sql = "update user set leftvotes = leftvotes - 1 where id = %s"
-    cur.execute(sql,userid)
+    # 更新剩余票数和最后投票时间
+    lastvote_time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
+    sql = "update user set leftvotes = leftvotes - 1, lastvotetime = %s where id = %s"
+    cur.execute(sql, (lastvote_time,userid))
     conn.commit()
     cur.close()
     conn.close()
