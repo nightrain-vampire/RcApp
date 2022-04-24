@@ -1,3 +1,5 @@
+const app = getApp();
+
 Page({
   data: {
     presentee: {}, //保存表单除图片以外的字段
@@ -9,50 +11,50 @@ Page({
     contact: null, //当前登录用户的联系方式
     fileIndex: 0, //图片索引
 
-    picList: [] //返回给后端的url列表
+    picList: [], //返回给后端的url列表
+
+    picsize: '10MB', //照片的文件大小
+    picPPI: '72PPI', //照片清晰度限制
+
+    // 用户信息
+    username: '',
+    uid: '',
+    userid: '',
+
+    // 要修改的提名者的id
+    targetid: ''
   },
-  onLoad() {
-    var self = this;
-    self.setData({
-      name: 'QH',
-      uid: '19307130092',
-      contact: '19821237137'
+  onLoad(option) {
+    var that = this;
+    console.log(option.id)
+    that.setData({
+      userid: app.globalData.userid,
+      uid: app.globalData.uid,
+      username: app.globalData.username,
+      targetid: option.id
     })
-    // 下面部分暂时不用，目前先写死...
-    // wx.getStorage({
-    //   //需要在登录功能中调用wx.setStorage并把 key 设置为info
-    //   key: 'info',
-    //   success: function (res) {
-    //     self.setData({
-    //       name: res.data['username'],
-    //       admin: res.data['admin'] === 1 ? '管理员' : '普通用户',
-    //       uid: res.data['uid']
-    //     })
-    //     self.checkName()
-    //   }
-    // })
   },
   //主要是检查有无完善联系方式
-  checkName: function () {
-    if (this.data.contact == null) {
-      wx.showModal({
-        title: '提示',
-        content: '请先完善个人信息',
-        showCancel: false,
-        duration: 2000
-      })
-      setTimeout(() => {
-        wx.switchTab({
-          url: '../user/user',
-        })
-      }, 1500)
-    }
-  },
+  // checkName: function () {
+  //   if (this.data.contact == null) {
+  //     wx.showModal({
+  //       title: '提示',
+  //       content: '请先完善个人信息',
+  //       showCancel: false,
+  //       duration: 2000
+  //     })
+  //     setTimeout(() => {
+  //       wx.switchTab({
+  //         url: '../user/user',
+  //       })
+  //     }, 1500)
+  //   }
+  // },
   nameInput: function (e) {
-    this.data.presentee['username'] = e.detail.value;
+    this.data.presentee['rname'] = e.detail.value;
   },
-  uidInput: function (e) {
-    this.data.presentee['rid'] = e.detail.value;
+  reasonBlur: function (e) {
+    this.data.presentee['reason'] = e.detail.value;
   },
   bindTextAreaBlur: function (e) {
     this.data.presentee['details'] = e.detail.value;
@@ -136,13 +138,14 @@ Page({
   uploadInfo(info) {
     var param = info
     //保存操作者的基本信息
-    param['uid'] = this.data.uid
-    param['name'] = this.data.name
-    param['contact'] = this.data.contact
+    param['userid'] = this.data.userid
+    //保存图片
     param['pic'] = this.data.picList
+    //目标id
+    param['targetid'] = this.data.targetid
     //发起请求
     wx.request({
-      url: 'http://127.0.0.1:5000/uploadInfo', //待定
+      url: 'http://127.0.0.1:5000/editInfo', //待定
       method: "POST",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -175,7 +178,7 @@ Page({
     var pInfo = this.data.presentee
     //pInfo['pic'] = ''
     var that = this
-    if (pInfo['username'] === '' || pInfo['details'] === '' || pInfo['username'] === undefined || pInfo['details'] === undefined) {
+    if (pInfo['rname'] === '' || pInfo['details'] === '' || pInfo['rname'] === undefined || pInfo['details'] === undefined || pInfo['reason'] === '' || pInfo['reason'] === undefined) {
       wx.showModal({
         cancelColor: '#999', //取消按钮的文字颜色
         title: '提示',

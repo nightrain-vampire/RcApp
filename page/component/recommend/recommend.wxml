@@ -1,64 +1,60 @@
 <view class="main">
   <view class="recommend-bg">
-    <view class="name-area">
-        <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993dd2.png" mode="aspectFit" class="name_bimg" ></image>
-        <view class ="name_input_bimg">
-          <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="" auto-focus="true" />
-        </view>
-    </view>
-      
-    <view class="reason-area">
-      <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993de3.png" mode="aspectFit" class="reason_bimg" ></image>
-      <view class ="reason_bimg">
-        <!-- <input bindinput="bindKeyInput" placeholder="请输入理由"/> -->
-        <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="请输入理由" auto-focus="true" />
+    <view class="tag-area">
+      <view class="page-icon">
+        <image src="https://pic.imgdb.cn/item/6264bd9c239250f7c58806de.png" mode="aspectFit" style="width: 100%; height: 100%;"></image>
+      </view>
+      <view class="title-area">
+        <view class="page-title">提名-详情部分</view>
       </view>
     </view>
 
+    <view class="name-area">
+      <view class="name-box">
+        <view class="name-title">提名名称:</view>
+        <input placeholder="(团体/个人的名称)" model:value="{{presentee['rname']}}" bindinput="nameInput" class="name-input"></input>
+      </view>
+    </view>
+
+    <view class="reason-area">
+      <view class="reason-box">
+        <view class="reason-title">提名人理由:</view>
+        <textarea model:value="{{presentee['reason']}}" bindblur="reasonBlur" class="reason-input" />
+      </view>
+    </view>
 
     <view class="photo_upload-area">
-      <image src="https://pic.imgdb.cn/item/625a6eae239250f7c5995a54.png" mode="scaleToFill" class="photo_upload_bg_bimg" ></image>
-      <!-- <view class="photo_upload_bimg"> -->
-        <view class="Rform">
-          <form report-submit="true" onsubmit="uploadImgs">
-            <view class="cu-bar margin-top">
-              <view class="action">
-                <text class = "upload_restriction">照片上传(1-4张)</text>
-              </view>
-              <view class="photo_number">
-                {{imgList.length}}/{{imgMaxNumber}}
-              </view>
-            </view>
-            <view class="cu-form-group">
-              <view class="grid col-4 grid-square flex-sub">
-                <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
-                  <image src='{{imgList[index]}}' mode='aspectFill'></image>
-                  <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
-                    <text class="cuIcon-close"></text>
-                  </view>
-                </view>
-                <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<imgMaxNumber}}">
-                  <text class="cuIcon-cameraadd"></text>
+      <form class="photo_upload_bg_bimg" report-submit="true" onsubmit="uploadImgs">
+        <view class="photo-title">
+          <view class="solid-bottom text-sl" bindtap="ChooseImage" wx:if="{{imgList.length<imgMaxNumber}}"><text class="cuIcon-picfill"></text></view>
+          <view class="photo-title2" wx:if="{{imgList.length == 0}}">照片上传</view>
+          <view class="display" wx:if="{{imgList.length > 0}}">
+            <view class="grid col-4 grid-square flex-sub">
+              <view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+                <image src='{{imgList[index]}}' mode='aspectFill'></image>
+                <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                  <text class="cuIcon-close"></text>
                 </view>
               </view>
             </view>
-          </form>
+          </view>
         </view>
-
-      <!-- </view> -->
-
+        <view class="photo-title3">1-4张，照片的文件大小{{picsize}}/清晰度限制{{picPPI}}</view>
+      </form>
     </view>
 
-    <view class="info-area"> 
-      <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993deb.png" mode="aspectFit" class="info_bimg" ></image>
-      <view class ="info_bimg">
-        <!-- <input bindinput="bindKeyInput" placeholder="输入信息"/> -->
-        <textarea bindblur="bindTextAreaBlur" auto-height="true" placeholder="请输入信息" auto-focus="true" />
+    <view class="info-area">
+      <view class="info-box">
+        <view class="reason-title">提名人信息:</view>
+        <textarea model:value="{{presentee['details']}}" bindblur="bindTextAreaBlur" class="info-input" />
       </view>
     </view>
 
-    <navigator url="/page/component/modifyrecommend/modifyrecommend" class="button-area">
-      <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993dc5.png" mode="aspectFit" class="button_bimg" ></image>
-    </navigator>
+    <view class="button-area">
+      <view class="sub-btn">
+        <image src="https://pic.imgdb.cn/item/625a6e9f239250f7c5993dc5.png" mode="aspectFit" class="button_bimg" bindtap="submit"></image>
+      </view>
+    </view>
+
   </view>
 </view>

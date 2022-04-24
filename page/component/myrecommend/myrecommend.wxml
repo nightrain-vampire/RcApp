@@ -33,7 +33,7 @@
                     <view class="bottomArea">
                         <view class="infname">{{item.name}}</view>
                         <view class="infstate">{{item.state}}</view>
-                        <view class="infdetail" id="{{cid}}">修改</view>
+                        <view class="infdetail" id="{{item.id}}" bindtap="toEdit">修改</view>
                     </view>
                 </view>
             </view>

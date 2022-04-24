@@ -108,15 +108,25 @@ def uploadInfo():
     print(info)
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
-    sql = "insert into vote(uid,name,intro,votes,pic) values(%s,%s,%s,%s,%s)"
+    sql = "insert into nominee(userid,name,intro,votes,pic,state,reason) values(%s,%s,%s,%s,%s,%s,%s)"
     ImgUrl = ','.join(info['pic'])
-    cur.execute(sql,(info['rid'],info['username'],info['details'], 0, ImgUrl))   # 插入数据
-    # 获取这条记录的主id
-    vid = cur.lastrowid
+    cur.execute(sql,(info['userid'],info['rname'],info['details'], 0, ImgUrl, 1, info['reason']))   # 插入数据
     conn.commit()
-    # 插入投票记录
-    sql = "insert into recommend(vid,name,uid,contact) values(%s,%s,%s,%s)"
-    cur.execute(sql,(vid,info['name'],info['uid'],info['contact']))
+    cur.close()
+    conn.close()
+    return 'success'
+
+
+# 修改信息
+@app.route('/editInfo',methods=['POST'])
+def editInfo():
+    info = json.loads(request.values.get('pinfo'))          # 获取前端传来的数据
+    print(info)
+    conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
+    cur = conn.cursor()
+    sql = "update nominee set userid=%s,name=%s,intro=%s,pic=%s,state=%s,reason=%s where id=%s"
+    ImgUrl = ','.join(info['pic'])
+    cur.execute(sql,(info['userid'],info['rname'],info['details'], ImgUrl, 1, info['reason'], info['targetid']))   # 插入数据
     conn.commit()
     cur.close()
     conn.close()

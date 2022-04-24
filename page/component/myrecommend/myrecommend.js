@@ -25,6 +25,13 @@ Page({
         })
         that.getMyVotes();
     },
+    toEdit(e) {
+        var id = e.target.id
+        console.log(id)
+        wx.navigateTo({
+          url: '../modifyrecommend/modifyrecommend?id=' + id
+        })
+    },
     getMyVotes() {
         var that = this
         //向后端接口发请求
