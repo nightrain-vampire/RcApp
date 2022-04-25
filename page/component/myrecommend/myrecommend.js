@@ -36,7 +36,7 @@ Page({
         var that = this
         //向后端接口发请求
         wx.request({
-            url: 'http://127.0.0.1:5000/getmyvotes',
+            url: 'http://10.107.12.230:5001/getmyvotes',
             method: "POST",
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',

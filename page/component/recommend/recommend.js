@@ -108,7 +108,7 @@ Page({
     wx.uploadFile({
       filePath: that.data.imgList[that.data.fileIndex],
       name: 'file',
-      url: 'http://127.0.0.1:5000/uploadImg', //待定
+      url: 'http://10.107.12.230:5001/uploadImg', //待定
       success(res) {
         console.log(res.data)
         //pInfo['pic'] = pInfo['pic'] + res.data 
@@ -141,7 +141,7 @@ Page({
     param['pic'] = this.data.picList
     //发起请求
     wx.request({
-      url: 'http://127.0.0.1:5000/uploadInfo', //待定
+      url: 'http://10.107.12.230:5001/uploadInfo', //待定
       method: "POST",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
