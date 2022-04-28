@@ -37,7 +37,7 @@ Page({
       userid: app.globalData.userid
     })
     wx.request({
-      url: 'http://10.107.12.230:5001/getleft',
+      url: 'https://tuanyi.fudan.edu.cn/getleft',
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -93,7 +93,7 @@ Page({
     var that = this
     //向后端接口发请求
     wx.request({
-      url: 'http://10.107.12.230:5001/getvotes',
+      url: 'https://tuanyi.fudan.edu.cn/getvotes',
       method: "POST",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
