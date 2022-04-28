@@ -228,7 +228,7 @@ Page({
     var curleft = that.data.leftvotes //获取当前剩余票数
     if (curleft > 0) {
       wx.request({
-        url: 'http://10.107.12.230:5001/vote',
+        url: 'https://tuanyi.fudan.edu.cn/vote',
         method: 'POST',
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -239,6 +239,7 @@ Page({
           votes: that.data.userid
         },
         success: function (res) {
+            // console.log("daad")
           that.setData({
             ['cardData.' + index + '.votes']: cur + 1,
             leftvotes: curleft - 1
@@ -269,7 +270,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'http://10.107.12.230:5001/searchkey',
+        url: 'https://tuanyi.fudan.edu.cn/searchkey',
         method: 'POST',
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',

@@ -101,16 +101,17 @@ Page({
   },
   //上传图片
   uploadImgs(pInfo) {
-    console.log(this.data.imgList)
+    // console.log("图片"+this.data.imgList)
     var that = this
     // 注意下面的that 不能换成this，不然要出事...
     // 小程序只能循环上传图片, 但直接for循环会出事情...
+    // console.log("图片"+that.data.imgList[that.data.fileIndex])
     wx.uploadFile({
       filePath: that.data.imgList[that.data.fileIndex],
       name: 'file',
       url: 'https://tuanyi.fudan.edu.cn/uploadImg', //待定
       success(res) {
-        console.log(res.data)
+        // console.log("图片"+res.data)
         //pInfo['pic'] = pInfo['pic'] + res.data 
         that.data.picList.push(res.data)
         console.log(that.data.picList)

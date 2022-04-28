@@ -1,10 +1,11 @@
 import base64
 from email import charset
-from time import time
-from flask import Flask, request, jsonify
+import time
+from flask import Flask, request, jsonify, render_template
 import json
 import pymysql
 import datetime
+from flask_cors import CORS
 
 user = 'root'
 password = ''
@@ -14,13 +15,16 @@ host = '127.0.0.1'
 port = 3306         # 连不上的话可以康康端口号对不对
 
 app = Flask(__name__)
-
+CORS(app)
 Nominee_State = ['草稿', '待审核', '已通过', '已拒绝']
 
 @app.route('/')
 def index():
     return '<h1>Hello World!</h1>'
 
+@app.route('/uis')
+def uis():
+    return render_template('oauth.html')
 
 # 获得已提名人的信息(按得票数降序排列)
 @app.route('/getvotes', methods=['POST'])
@@ -34,7 +38,7 @@ def getvotes():
     cur.close()
     conn.close()
     # 构建返回值
-    res = {}
+    res = []
     for i in range(len(temp)):
         tmplist = {}
         tmplist['id'] = temp[i][0]
@@ -44,9 +48,9 @@ def getvotes():
         tmplist['votes'] = temp[i][4]
         tmplist['img'] = temp[i][5].split(',')
         tmplist['reason'] = temp[i][7]
-        res[i] = tmplist
+        res.append(tmplist)
     print(res)
-    return res
+    return jsonify(res)
 
 
 # 获取某个用户的所有提名
@@ -60,7 +64,7 @@ def getmyvotes():
     temp = cur.fetchall()
     cur.close()
     conn.close()
-    res = {}
+    res = []
     for i in range(len(temp)):
         tmplist = {}
         tmplist['id'] = temp[i][0]
@@ -69,9 +73,9 @@ def getmyvotes():
         tmplist['votes'] = temp[i][4]
         tmplist['img'] = temp[i][5].split(',')
         tmplist['state'] = Nominee_State[int(temp[i][6])]
-        res[i] = tmplist
+        res.append(tmplist)
     print(res)
-    return res
+    return jsonify(res)
 
 
 # 获取当前要修改的人的信息
@@ -93,32 +97,33 @@ def getcurrent():
     res['votes'] = temp[0][4]
     res['img'] = temp[0][5].split(',')
     res['reason'] = temp[0][7]
-    return res
+    return jsonify(res)
     
 
 # 获取剩余票数
 @app.route('/getleft', methods=['POST'])
 def getLeft():
-    key = request.form.get('key')
+    key = str(json.loads(request.values.get("key")))
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
     sql = "select leftvotes,lastvotetime from user where id = %s"
     cur.execute(sql, key)
-    temp = cur.fetchall()
-    last_time = str(temp[0][1])
+    temp = cur.fetchall()[0]
+    print(temp)
+    conn.commit()
+    left_votes = temp[0]
+    last_time = str(temp[1])
     current_time = str(datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d'))
-    res = {}
-    res['leftvotes'] = temp[0][0]
+    print(current_time)
     # 如果上一次投票时间是昨天或者更早，刷新剩余票数
     if current_time > last_time:
         sql = "update user set leftvotes = 10 where id = %s"
         cur.execute(sql, key)
         conn.commit()
-        res['leftvotes'] = 10
+        left_votes = 10
     cur.close()
     conn.close()
-    print(res)
-    return res
+    return jsonify({'leftvotes': left_votes})
 
 
 # 上传图片
@@ -126,18 +131,21 @@ def getLeft():
 def uploadImg():
     img = request.files.get('file')
     # path = "D:\\Term\\凌客工坊\\uis\\RcApp\\images\\"
-    path = "C:\\xampp\\htdocs\\rcapp_images\\"
+    path = "C:\\xampp\\htdocs\\RcApp_Backend\\static\\"
     img_name = img.filename
+    print("圖片名字"+img_name)
     file_path = path + img_name
     img.save(file_path)
     # return '../../../images/' + img_name
-    return 'https://tuanyi.fudan.edu.cn/rcapp_images/' + img_name
+    return 'https://tuanyi.fudan.edu.cn/static/' + img_name
 
 
 # 上传信息
 @app.route('/uploadInfo',methods=['POST'])
 def uploadInfo():
-    info = json.loads(request.values.get('pinfo'))          # 获取前端传来的数据
+    info = json.loads(request.values.get('pinfo'))        # 获取前端传来的数据
+    # pinfo = json.loads(request.values.get('pinfo'))
+    # print(pinfo)
     print(info)
     conn = pymysql.connect(host=host, port=port, user=user, password=password, db=database, charset=charset)
     cur = conn.cursor()
@@ -203,7 +211,7 @@ def search():
     temp = cur.fetchall()
     cur.close()
     conn.close()
-    res = {}
+    res = []
     for i in range(len(temp)):
         tmplist = {}
         tmplist['id'] = temp[i][0]
@@ -212,10 +220,9 @@ def search():
         tmplist['intro'] = temp[i][3]
         tmplist['votes'] = temp[i][4]
         tmplist['img'] = temp[i][5].split(',')
-        res[i] = tmplist
+        res.append(tmplist)
     print(res)
-    return res
-
+    return jsonify(res)
 
 if __name__ == '__main__' : 
-    app.run(host='0.0.0.0', port = 5001)
+    app.run(host='0.0.0.0', port = 5000, debug = True)

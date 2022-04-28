@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- 主机： 127.0.0.1:3316
--- 生成日期： 2022-04-24 15:49:00
--- 服务器版本： 10.4.21-MariaDB
--- PHP 版本： 8.0.12
+-- 主机： 127.0.0.1
+-- 生成日期： 2022-04-28 17:46:18
+-- 服务器版本： 10.4.19-MariaDB
+-- PHP 版本： 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `nominee` (
   `name` varchar(15) NOT NULL,
   `intro` text NOT NULL,
   `votes` int(11) NOT NULL DEFAULT 0,
-  `pic` varchar(500) DEFAULT NULL,
+  `pic` varchar(5000) DEFAULT NULL,
   `state` int(11) NOT NULL DEFAULT 1 COMMENT '表示审核状态，0表示草稿（未实现），1表示待审批，2表示审批通过，3表示审批不通过',
   `reason` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -43,17 +43,10 @@ CREATE TABLE `nominee` (
 --
 
 INSERT INTO `nominee` (`id`, `userid`, `name`, `intro`, `votes`, `pic`, `state`, `reason`) VALUES
-(30, '1', '崔晨昊', '测试0', 24, '../../../images/a1VJ9rLxsQkNd0b74fe8662fb2a482393d6f6b95792a.jpg,../../../images/aunzMApUc9vt0c694be617b86981b51606836d719258.jpg,../../../images/c37A2uxr2HUyff3e7b314733d90b3724b3c03de6da8b.jpg,../../../images/aJiaAPRmFHOed0902a83129276e00706a39e368b00c7.jpg', 2, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'),
-(31, '2', '无图片测试', '测试1', 2, '', 1, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'),
-(32, '1', '占位符', '测试2', 3, '../../../images/CyRzkT8QEFlNb33ea1eb75a593b5f919e4960f659419.jpg,../../../images/4yEdRwWcZJHBd498d06d230643fa9053c84077f58c7b.jpg', 1, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'),
-(33, '2', 'dwhd', 'sqsS', 14, '../../../images/aIxqgc5YMk0wd498d06d230643fa9053c84077f58c7b.jpg,../../../images/7HmOMhiuUI1c9e4ab4d27d63d310bc1349d8056cd4d0.png', 1, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'),
-(34, '1', 'qihao', 'taijule', 1, '../../../images/vXk4s2i69qL7d498d06d230643fa9053c84077f58c7b.jpg,../../../images/n7TfDG1J5yN05d90a5ddfeb5f1e24c9d5a262356ece0.png', 1, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh'),
-(35, '1', '老李', '修改后的理由', 20, '../../../images/ou5z5ADr8vEz7dbc614aaf3243bde440e9a311570350.jpg,../../../images/Bql4mQCO9Wf5ff3e7b314733d90b3724b3c03de6da8b.jpg,../../../images/y14PcyQzLl72d0902a83129276e00706a39e368b00c7.jpg', 2, '修改1'),
-(36, '1', '肝帝', '测试4', 45, '../../../images/a1VJ9rLxsQkNd0b74fe8662fb2a482393d6f6b95792a.jpg,../../../images/aunzMApUc9vt0c694be617b86981b51606836d719258.jpg,../../../images/c37A2uxr2HUyff3e7b314733d90b3724b3c03de6da8b.jpg,../../../images/aJiaAPRmFHOed0902a83129276e00706a39e368b00c7.jpg', 2, '测试5'),
-(37, '1', '测试10', '测试信息10', 0, '../../../images/pp0a7DBhN7V57dbc614aaf3243bde440e9a311570350.jpg,../../../images/xk7VsaVT5GZfff3e7b314733d90b3724b3c03de6da8b.jpg,../../../images/eMBWYc0jnQh8d0902a83129276e00706a39e368b00c7.jpg', 1, '测试理由10'),
-(38, '1', '无图片', '信息', 0, '', 1, 'hhhhhhhhhhh'),
-(39, '3', 'test777777', 'sadsasa', 0, '../../../images/2eSsJXcV72Vtc7316c31f1922c0373abfa139674197b.png', 1, 'hhhhhhhhhhd'),
-(40, '3', '12121', 'f23f32f', 0, '../../../images/T9p5NGm8pxWj7dbc614aaf3243bde440e9a311570350.jpg,../../../images/0ETOItJ4JNayff3e7b314733d90b3724b3c03de6da8b.jpg,../../../images/6F1UN59TW5obd0902a83129276e00706a39e368b00c7.jpg', 1, '31212312e1e3d32dfr2ef31r');
+(55, '3', '程度', '地方', 0, 'https://tuanyi.fudan.edu.cn/static/8lPGEfXkHlQra29c9479b3421c05835301b5c988ad46.png', 2, '程度'),
+(56, '3', '11', '111', 7, 'https://tuanyi.fudan.edu.cn/static/wHfmDX0BVlxW7e016b257adde4b5c3613731af4a30f0.png,https://tuanyi.fudan.edu.cn/static/QXvo4uUqmQU7bdd81148e5b3e133d3db58780c216240.png', 2, '11'),
+(57, '3', '得分', '但是是的', 0, 'https://tuanyi.fudan.edu.cn/static/B4bKBmXV9e8r9af0cc4fc95d79903d57c66fb304dfc6.png,https://tuanyi.fudan.edu.cn/static/OcV3ZP97JwcK8ba447102c6cc6cca714e3110f1a11b2.png,https://tuanyi.fudan.edu.cn/static/BEIrQYwTCYeDff81a04950d024017b913276ae285a77.png', 1, '是的'),
+(58, '3', '所得到', '得到的', 0, 'https://tuanyi.fudan.edu.cn/static/Geyx5D1hcNk6ff81a04950d024017b913276ae285a77.png', 1, '顶顶顶顶');
 
 -- --------------------------------------------------------
 
@@ -76,7 +69,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `uid`, `leftvotes`, `lastvotetime`) VALUES
 (1, 'QH', '19307130092', 0, '2022-04-17'),
 (2, 'wthhh', '18302010000', 8, '2022-04-16'),
-(3, 'mock0', '1930713000', 0, NULL);
+(3, 'mock0', '1930713000', 3, '2022-04-28');
 
 -- --------------------------------------------------------
 
@@ -129,7 +122,16 @@ INSERT INTO `votes` (`id`, `userid`, `ip`, `Nomineeid`, `vote_time`) VALUES
 (30, 3, '127.0.0.1', 35, '2022-04-24 11:09:48'),
 (31, 3, '127.0.0.1', 35, '2022-04-24 11:09:48'),
 (32, 3, '127.0.0.1', 35, '2022-04-24 11:09:49'),
-(33, 3, '127.0.0.1', 35, '2022-04-24 11:09:49');
+(33, 3, '127.0.0.1', 35, '2022-04-24 11:09:49'),
+(34, 3, '10.230.37.83', 30, '2022-04-25 06:24:31'),
+(35, 3, '10.230.37.83', 35, '2022-04-25 06:30:28'),
+(36, 3, '61.129.42.28', 56, '2022-04-28 15:30:53'),
+(37, 3, '61.129.42.28', 56, '2022-04-28 15:31:34'),
+(38, 3, '61.129.42.28', 56, '2022-04-28 15:35:46'),
+(39, 3, '61.129.42.28', 56, '2022-04-28 15:38:07'),
+(40, 3, '61.129.42.28', 56, '2022-04-28 15:40:03'),
+(41, 3, '61.129.42.28', 56, '2022-04-28 15:41:21'),
+(42, 3, '61.129.42.28', 56, '2022-04-28 15:42:44');
 
 --
 -- 转储表的索引
@@ -162,7 +164,7 @@ ALTER TABLE `votes`
 -- 使用表AUTO_INCREMENT `nominee`
 --
 ALTER TABLE `nominee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- 使用表AUTO_INCREMENT `user`
@@ -174,7 +176,7 @@ ALTER TABLE `user`
 -- 使用表AUTO_INCREMENT `votes`
 --
 ALTER TABLE `votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

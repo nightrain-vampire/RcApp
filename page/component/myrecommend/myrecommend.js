@@ -2,7 +2,7 @@ const app = getApp();
 
 Page({
     data: {
-        avatar: 'https://tuanyi.fudan.edu.cn/rcapp_images/avatar.png',
+        avatar: 'https://tuanyi.fudan.edu.cn/static//avatar.png',
         username: 'XXXX',
         subtitle: 'xxxxxxxxxxxxxxxxxxxxxx',
         cardData: {},

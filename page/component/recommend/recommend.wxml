@@ -2,7 +2,7 @@
   <view class="recommend-bg">
     <view class="tag-area">
       <view class="page-icon">
-        <image src="https://pic.imgdb.cn/item/6264bd9c239250f7c58806de.png" mode="aspectFit" style="width: 100%; height: 100%;"></image>
+        <image src="https://pic.imgdb.cn/item/6264bd9c239250f7c58806de.png" style="width: 100%; height: 100%;"></image>
       </view>
       <view class="title-area">
         <view class="page-title">提名-详情部分</view>
