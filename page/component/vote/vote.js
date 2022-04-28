@@ -37,7 +37,7 @@ Page({
       userid: app.globalData.userid
     })
     wx.request({
-      url: 'http://127.0.0.1:5000/getleft',
+      url: 'https://tuanyi.fudan.edu.cn/getleft',
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -93,7 +93,7 @@ Page({
     var that = this
     //向后端接口发请求
     wx.request({
-      url: 'http://127.0.0.1:5000/getvotes',
+      url: 'https://tuanyi.fudan.edu.cn/getvotes',
       method: "POST",
       header: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -228,7 +228,7 @@ Page({
     var curleft = that.data.leftvotes //获取当前剩余票数
     if (curleft > 0) {
       wx.request({
-        url: 'http://127.0.0.1:5000/vote',
+        url: 'http://10.107.12.230:5001/vote',
         method: 'POST',
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -269,7 +269,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'http://127.0.0.1:5000/searchkey',
+        url: 'http://10.107.12.230:5001/searchkey',
         method: 'POST',
         header: {
           'Content-Type': 'application/x-www-form-urlencoded',
