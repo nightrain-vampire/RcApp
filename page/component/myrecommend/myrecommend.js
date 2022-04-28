@@ -36,7 +36,7 @@ Page({
         var that = this
         //向后端接口发请求
         wx.request({
-            url: 'http://10.107.12.230:5001/getmyvotes',
+            url: 'https://tuanyi.fudan.edu.cn/getmyvotes',
             method: "POST",
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
