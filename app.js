@@ -9,13 +9,8 @@ App({
     console.log('App Hide')
   },
   globalData: {
-    uid: '19307130000',
-    hasLogin: false,
-    username: 'mock0',
-    userid: '3',
-    gender: '',
-    admin: 0,
-    nickname: '',
-    passwd: ''
+    uid: '',
+    username: '',
+    userid: '',
   }
 })

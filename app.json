@@ -6,7 +6,7 @@
         "page/component/card/card",
         "page/component/user/user",
         "page/component/voterule/voterule",
-        "page/component/history/history",
+        "page/component/uis/uis",
         "page/component/admin/admin",
         "page/component/myrecommend/myrecommend",
         "page/component/modifyrecommend/modifyrecommend"

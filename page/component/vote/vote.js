@@ -34,7 +34,7 @@ Page({
     that.setData({
       username: app.globalData.username,
       uid: app.globalData.uid,
-      userid: app.globalData.userid
+    //   userid: app.globalData.userid
     })
     wx.request({
       url: 'https://tuanyi.fudan.edu.cn/getleft',
@@ -44,10 +44,10 @@ Page({
         'chartset': 'utf-8'
       },
       data: {
-        key: app.globalData.userid
+        key: app.globalData.uid
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         that.setData({
           leftvotes: res.data.leftvotes
         })
@@ -62,7 +62,7 @@ Page({
         console.log('出现小bug...')
       }
     })
-    console.log(that.data.leftvotes)
+    // console.log(that.data.leftvotes)
   },
   openMask: function (e) {
     var that = this
@@ -100,7 +100,7 @@ Page({
         'chartset': 'utf-8'
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         var psize = Object.keys(res.data).length
         var tmparray = []
         var tmplength = []
@@ -122,8 +122,8 @@ Page({
             flag: Array(psize).fill(true),
             Plength: tmplength,
           })
-          console.log(that.data.Plength)
-          console.log(that.data.RightShow)
+        //   console.log(that.data.Plength)
+        //   console.log(that.data.RightShow)
         } else {
           wx.showToast({
             title: '目前没有人被提名',
@@ -236,7 +236,7 @@ Page({
         },
         data: {
           card: obj.id,
-          votes: that.data.userid
+          votes: that.data.uid
         },
         success: function (res) {
             // console.log("daad")
@@ -244,9 +244,10 @@ Page({
             ['cardData.' + index + '.votes']: cur + 1,
             leftvotes: curleft - 1
           })
+        //   console.log('投票成功')
         },
         fail: res => {
-          console.log('投票失败')
+        //   console.log('投票失败')
         }
       })
     } else {
@@ -280,7 +281,7 @@ Page({
           key: that.data.searchkey
         },
         success: function (res) {
-          console.log(res.data)
+        //   console.log(res.data)
           var psize = Object.keys(res.data).length
           var tmparray = []
           var tmplength = []
@@ -302,8 +303,8 @@ Page({
               flag: Array(psize).fill(true),
               Plength: tmplength,
             })
-            console.log(that.data.Plength)
-            console.log(that.data.RightShow)
+            // console.log(that.data.Plength)
+            // console.log(that.data.RightShow)
           } else {
             wx.showToast({
               title: '无搜索结果',
@@ -316,7 +317,7 @@ Page({
         }
       })
     }
-    console.log(that.data.searchkey)
+    // console.log(that.data.searchkey)
     that.setData({
       searchkey: ''
     })

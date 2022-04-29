@@ -26,9 +26,9 @@ Page({
   },
   onLoad(option) {
     var that = this;
-    console.log(option.id)
+    // console.log(option.id)
     that.setData({
-      userid: app.globalData.userid,
+    //   userid: app.globalData.userid,
       uid: app.globalData.uid,
       username: app.globalData.username,
       targetid: option.id
@@ -194,9 +194,9 @@ Page({
           title: '上传成功，请等待审核结果',
           icon: 'success'
         })
-        // wx.reLaunch({
-        //   url: '../vote/vote', //刷新提名页
-        // })
+        wx.navigateTo({
+            url: '/page/component/myrecommend/myrecommend',
+          })
       },
       fail(res) {
         console.log(res)

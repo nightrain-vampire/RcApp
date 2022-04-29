@@ -24,7 +24,7 @@ Page({
   onLoad() {
     var that = this;
     that.setData({
-      userid: app.globalData.userid,
+    //   userid: app.globalData.userid,
       uid: app.globalData.uid,
       username: app.globalData.username
     })
@@ -47,15 +47,15 @@ Page({
   // },
   nameInput: function (e) {
     this.data.presentee['rname'] = e.detail.value;
-    console.log(this.data.presentee['rname'])
+    // console.log(this.data.presentee['rname'])
   },
   reasonBlur: function (e) {
     this.data.presentee['reason'] = e.detail.value;
-    console.log(this.data.presentee['reason'])
+    // console.log(this.data.presentee['reason'])
   },
   bindTextAreaBlur: function (e) {
     this.data.presentee['details'] = e.detail.value;
-    console.log(this.data.presentee['details'])
+    // console.log(this.data.presentee['details'])
   },
   ChooseImage() {
     //从本地相册选择图片或使用相机拍照
@@ -137,7 +137,7 @@ Page({
   uploadInfo(info) {
     var param = info
     //保存操作者的基本信息
-    param['userid'] = this.data.userid
+    param['uid'] = this.data.uid
     //保存图片
     param['pic'] = this.data.picList
     //发起请求
@@ -152,17 +152,17 @@ Page({
         pinfo: JSON.stringify(param)
       },
       success: function (res) {
-        console.log(res)
+        // console.log(res)
         wx.showToast({
           title: '上传成功，请等待审核结果',
           icon: 'success'
         })
-        // wx.reLaunch({
-        //   url: '../vote/vote', //刷新提名页
-        // })
+        wx.navigateTo({
+            url: '/page/component/index/index',
+          })
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
         wx.showToast({
           title: '上传失败',
           icon: 'error'
@@ -171,7 +171,7 @@ Page({
     })
   },
   submit: function () {
-    console.log(this.data.presentee)
+    // console.log(this.data.presentee)
     var pInfo = this.data.presentee
     //pInfo['pic'] = ''
     var that = this
@@ -190,7 +190,7 @@ Page({
           if (res.cancel) {
             console.log('操作已终止')
           } else if (res.confirm) {
-            console.log(666)
+            // console.log(666)
             // 进行图片的上传
             if (that.data.imgList.length > 0) {
               that.uploadImgs(pInfo)
