@@ -4,6 +4,7 @@ Page({
   data: {
     presentee: {}, //保存表单除图片以外的字段
     imgList: [], //图片列表
+    compImgList: [],
     imgMaxNumber: 4, //上传图片的最大数量
     name: null, //当前登录用户的姓名
     admin: "user", //当前登录用户的角色
@@ -55,7 +56,8 @@ Page({
             reason: res.data.reason,
             details: res.data.intro,
           },
-          imgList: res.data.img
+          imgList: res.data.img,
+          compImgList: res.data.img
         })
         console.log(this.data.presentee)
         console.log(this.data.imgList)
