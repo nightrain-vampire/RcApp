@@ -2,13 +2,13 @@
     <view class="head-bg">
         <view class="nav-area">
             <navigator url="/page/component/recommend/recommend" class="nav">
-                <image src="https://pic.imgdb.cn/item/62528bc4239250f7c594bfcf.png" mode="aspectFit" class="bimg"></image>
+                <image src="../../static/recom.png" mode="aspectFit" class="bimg"></image>
             </navigator>
             <navigator url="/page/component/vote/vote" class="nav">
-                <image src="https://pic.imgdb.cn/item/62528be1239250f7c594f9d4.png" mode="aspectFit" class="bimg" ></image>
+                <image src="../../static/vote.png" mode="aspectFit" class="bimg" ></image>
             </navigator>
             <navigator url="/page/component/myrecommend/myrecommend" class="nav">
-                <image src="https://pic.imgdb.cn/item/62528c04239250f7c59540f7.png" mode="aspectFit" class="bimg" ></image>
+                <image src="../../static/myvote.png" mode="aspectFit" class="bimg" ></image>
             </navigator>
         </view>
     </view>

@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "我要提名",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "loading": "../loading/loading"
+  }
 }

@@ -11,10 +11,10 @@ Page({
     contact: null, //当前登录用户的联系方式
     fileIndex: 0, //图片索引
 
+    loading: false,
     picList: [], //返回给后端的url列表
 
-    picsize: '10MB', //照片的文件大小
-    picPPI: '72PPI', //照片清晰度限制
+    picsize: '5MB', //照片的文件大小
 
     // 用户信息
     username: '',
@@ -25,15 +25,14 @@ Page({
     targetid: ''
   },
   onLoad(option) {
-    var that = this;
     console.log(option.id)
-    that.setData({
+    this.setData({
       userid: app.globalData.userid,
       uid: app.globalData.uid,
       username: app.globalData.username,
       targetid: option.id
     })
-    that.getCurrent(option.id)
+    this.getCurrent(option.id)
   },
   getCurrent(Id) {
     var that = this;
@@ -48,9 +47,9 @@ Page({
       data: {
         id: id
       },
-      success: function(res) {
+      success: (res) => {
         console.log(res)
-        that.setData({
+        this.setData({
           presentee: {
             rname: res.data.name,
             reason: res.data.reason,
@@ -58,10 +57,10 @@ Page({
           },
           imgList: res.data.img
         })
-        console.log(that.data.presentee)
-        console.log(that.data.imgList)
+        console.log(this.data.presentee)
+        console.log(this.data.imgList)
       },
-      fail: function() {
+      fail: (e) => {
         console.log('出现小bug')
       }
     })
@@ -92,23 +91,49 @@ Page({
     this.data.presentee['details'] = e.detail.value;
   },
   ChooseImage() {
-    //从本地相册选择图片或使用相机拍照
     wx.chooseImage({
       count: this.data.imgMaxNumber,
       sizeType: 'compressed', //压缩图
       sourceType: ['album'], //从相册选择
       success: (res) => {
+        for (let file of res.tempFiles) {
+          console.log(file.size)
+          if(file.size >= 5000000) {
+            wx.showToast({
+              title:'上传图片不能大于5M!',  //标题
+              icon:'none'       //图标 none不使用图标，详情看官方文档
+            })
+            return
+          }
+        }
         if (this.data.imgList.length != 0) {
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths)
-            //tempFilePaths: 图片的本地临时文件路径列表 (本地路径)
+                //tempFilePaths: 图片的本地临时文件路径列表 (本地路径)
           })
         } else {
           this.setData({
             imgList: res.tempFilePaths
           })
         }
-        console.log(this.data.imgList)
+        //console.log(res.tempFilePaths)
+      },
+      complete: e => {
+        for (let path of this.data.imgList) {
+          console.log(path)
+          wx.compressImage({
+            quality: 80,
+            src: path,
+            success: res => {
+              console.log(res.tempFilePath)
+              this.data.compImgList.push(res.tempFilePath)
+            },
+            fail: e => {
+              console.log(e)
+              this.data.compImgList.push(path)
+            }
+          })
+        }
       }
     });
   },
@@ -126,40 +151,40 @@ Page({
       success: res => {
         if (res.confirm) {
           this.data.imgList.splice(e.currentTarget.dataset.index, 1);
+          this.data.compImgList.splice(e.currentTarget.dataset.index, 1);
           this.setData({
-            imgList: this.data.imgList
+            imgList: this.data.imgList,
+            compImgList: this.data.compImgList
           })
-          console.log(this.data.imgList)
         }
       }
     })
   },
   //上传图片
   uploadImgs(pInfo) {
-    console.log(this.data.imgList)
-    var that = this
-    // 注意下面的that 不能换成this，不然要出事...
-    // 小程序只能循环上传图片, 但直接for循环会出事情...
+    this.setData({
+      loading: true
+    });
     wx.uploadFile({
-      filePath: that.data.imgList[that.data.fileIndex],
+      filePath: this.data.compImgList[this.data.fileIndex],
       name: 'file',
-      url: 'https://tuanyi.fudan.edu.cn/uploadImg', //待定
-      success(res) {
-        console.log(res.data)
-        //pInfo['pic'] = pInfo['pic'] + res.data 
-        that.data.picList.push(res.data)
-        console.log(that.data.picList)
-        that.data.fileIndex = that.data.fileIndex + 1
-        if (that.data.fileIndex == that.data.imgList.length) {
-          that.data.fileIndex = 0 //传完，归零
-          that.uploadInfo(pInfo)
+      url: 'https://tuanyi.fudan.edu.cn/uploadImg',
+      success: (res) => {
+        this.data.picList.push(res.data)
+        console.log(this.data.picList)
+        this.data.fileIndex = this.data.fileIndex + 1
+        if (this.data.fileIndex == this.data.compImgList.length) {
+          this.data.fileIndex = 0 //传完，归零
+          this.uploadInfo(pInfo)
         } else {
-          that.uploadImgs(pInfo)
+          this.uploadImgs(pInfo)
         }
       },
-      fail(res) {
+      fail: (res) => {
         console.log(res)
-        //显示消息提示框
+        this.setData({
+          loading: false
+        });
         wx.showToast({
           title: '上传图片错误', //提示内容
           icon: 'error' //图标
@@ -188,20 +213,26 @@ Page({
       data: {
         pinfo: JSON.stringify(param)
       },
-      success: function (res) {
+      success: (res) =>  {
         console.log(res)
+        this.setData({
+          loading: false
+        });
         wx.showToast({
-          title: '上传成功，请等待审核结果',
+          title: '修改成功，等待审核',
           icon: 'success'
         })
         // wx.reLaunch({
         //   url: '../vote/vote', //刷新提名页
         // })
       },
-      fail(res) {
+      fail: (res) => {
         console.log(res)
+        this.setData({
+          loading: false
+        });
         wx.showToast({
-          title: '上传失败',
+          title: '修改失败',
           icon: 'error'
         })
       }

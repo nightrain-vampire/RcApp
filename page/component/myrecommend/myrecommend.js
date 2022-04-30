@@ -11,6 +11,7 @@ Page({
         RightShow: [], //控制右箭头的显示与否
         flag: [], //按钮是否能调用
         Plength: [], //每个候选人有多少图片
+        loading: false,
         // 用户信息
         username: '',
         uid: '',
@@ -34,6 +35,9 @@ Page({
     },
     getMyVotes() {
         var that = this
+        this.setData({
+            loading: true
+        })
         //向后端接口发请求
         wx.request({
             url: 'https://tuanyi.fudan.edu.cn/getmyvotes',
@@ -67,6 +71,7 @@ Page({
                         currentIndex: Array(psize).fill(0),
                         flag: Array(psize).fill(true),
                         Plength: tmplength,
+                        loading: false
                     })
                     console.log(that.data.Plength)
                     console.log(that.data.RightShow)
@@ -79,6 +84,9 @@ Page({
             },
             fail: res => {
                 console.log('加载失败', res)
+                this.setData({
+                    loading: false
+                })
             }
         })
     },

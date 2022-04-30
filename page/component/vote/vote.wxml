@@ -1,9 +1,11 @@
 <page-meta page-style="overflow: {{visible ? 'visible' : 'hidden'}}">
     <view class="main">
+        <loading wx-if="{{loading}}" />
+        
         <view class="head-bg">
             <view class="searchbar">
                 <input placeholder="搜索（搜索关键词查找候选人）" model:value = "{{searchkey}}" bindinput="searchInput"></input>
-                <image src="https://pic.imgdb.cn/item/6252f5e4239250f7c5776466.png" class="searchicon" bindtap="search" ></image>
+                <image src="../../static/search.png" class="searchicon" bindtap="search" ></image>
             </view>
             <view class="container">
                 <view wx:for="{{cardData}}" wx:for-index="cid">
@@ -16,10 +18,10 @@
                             </swiper>
                             <view class="smove">
                                 <view class="controlview">
-                                    <image wx:if="{{LeftShow[cid]}}" src="https://pic.imgdb.cn/item/625436ea239250f7c531be0f.png" class="controlimg" id="{{cid}}" bindtap="toLeft"></image>
+                                    <image wx:if="{{LeftShow[cid]}}" src="../../static/left.png" class="controlimg" id="{{cid}}" bindtap="toLeft"></image>
                                 </view>
                                 <view class="controlview">
-                                    <image wx:if="{{RightShow[cid]}}" src="https://pic.imgdb.cn/item/6254edfb239250f7c504285b.png" class="controlimg" id="{{cid}}" bindtap="toRight"></image>
+                                    <image wx:if="{{RightShow[cid]}}" src="../../static/right.png" class="controlimg" id="{{cid}}" bindtap="toRight"></image>
                                 </view>
                             </view>
                             <view class="inf">
