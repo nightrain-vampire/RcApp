@@ -34,7 +34,7 @@ Page({
     this.setData({
       username: app.globalData.username,
       uid: app.globalData.uid,
-      userid: app.globalData.userid
+    //   userid: app.globalData.userid
     })
     wx.request({
       url: 'https://tuanyi.fudan.edu.cn/getleft',
@@ -47,7 +47,7 @@ Page({
         key: app.globalData.uid
       },
       success: (res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setData({
           leftvotes: res.data.leftvotes
         })
@@ -62,7 +62,7 @@ Page({
         console.log('出现小bug...')
       }
     })
-    console.log(this.data.leftvotes)
+    // console.log(that.data.leftvotes)
   },
   openMask: function (e) {
     var index = e.target.id
@@ -100,7 +100,6 @@ Page({
         'chartset': 'utf-8'
       },
       success: (res) => {
-        console.log(res.data)
         var psize = Object.keys(res.data).length
         var tmparray = []
         var tmplength = []
@@ -123,8 +122,8 @@ Page({
             flag: Array(psize).fill(true),
             Plength: tmplength,
           })
-          console.log(this.data.Plength)
-          console.log(this.data.RightShow)
+        //   console.log(that.data.Plength)
+        //   console.log(that.data.RightShow)
         } else {
           wx.showToast({
             title: '目前没有人被提名',
@@ -239,7 +238,7 @@ Page({
           this.getVotes()
         },
         fail: res => {
-          console.log('投票失败')
+        //   console.log('投票失败')
         }
       })
     } else {
@@ -271,7 +270,6 @@ Page({
           key: this.data.searchkey
         },
         success: (res) => {
-          console.log(res.data)
           var psize = Object.keys(res.data).length
           var tmparray = []
           var tmplength = []
@@ -293,8 +291,8 @@ Page({
               flag: Array(psize).fill(true),
               Plength: tmplength,
             })
-            console.log(this.data.Plength)
-            console.log(this.data.RightShow)
+            // console.log(that.data.Plength)
+            // console.log(that.data.RightShow)
           } else {
             wx.showToast({
               title: '无搜索结果',
@@ -307,7 +305,7 @@ Page({
         }
       })
     }
-    console.log(this.data.searchkey)
+    // console.log(that.data.searchkey)
     that.setData({
       searchkey: ''
     })

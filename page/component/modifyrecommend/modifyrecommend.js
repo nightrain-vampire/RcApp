@@ -222,9 +222,9 @@ Page({
           title: '修改成功，等待审核',
           icon: 'success'
         })
-        // wx.reLaunch({
-        //   url: '../vote/vote', //刷新提名页
-        // })
+        wx.navigateTo({
+            url: '/page/component/myrecommend/myrecommend',
+          })
       },
       fail: (res) => {
         console.log(res)

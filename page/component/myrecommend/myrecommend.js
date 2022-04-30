@@ -20,7 +20,7 @@ Page({
     onLoad: function () {
         var that = this;
         that.setData({
-            userid: app.globalData.userid,
+            // userid: app.globalData.userid,
             uid: app.globalData.uid,
             username: app.globalData.username
         })
@@ -28,7 +28,7 @@ Page({
     },
     toEdit(e) {
         var id = e.target.id
-        console.log(id)
+        // console.log(id)
         wx.navigateTo({
           url: '../modifyrecommend/modifyrecommend?id=' + id
         })
@@ -47,10 +47,10 @@ Page({
                 'chartset': 'utf-8'
             },
             data: {
-                id : that.data.userid
+                id : that.data.uid
             },
             success: function (res) {
-                console.log(res.data)
+                // console.log(res.data)
                 var psize = Object.keys(res.data).length
                 var tmparray = []
                 var tmplength = []
@@ -73,8 +73,8 @@ Page({
                         Plength: tmplength,
                         loading: false
                     })
-                    console.log(that.data.Plength)
-                    console.log(that.data.RightShow)
+                    // console.log(that.data.Plength)
+                    // console.log(that.data.RightShow)
                 } else {
                     wx.showToast({
                         title: '目前没有提名',

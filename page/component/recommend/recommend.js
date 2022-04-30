@@ -164,7 +164,7 @@ Page({
   uploadInfo(info) {
     var param = info
     //保存操作者的基本信息
-    param['userid'] = this.data.userid
+    param['uid'] = this.data.uid
     //保存图片
     param['pic'] = this.data.picList
     //发起请求
@@ -204,7 +204,7 @@ Page({
     })
   },
   submit: function () {
-    console.log(this.data.presentee)
+    // console.log(this.data.presentee)
     var pInfo = this.data.presentee
     //pInfo['pic'] = ''
     var that = this
@@ -223,7 +223,7 @@ Page({
           if (res.cancel) {
             console.log('操作已终止')
           } else if (res.confirm) {
-            console.log(666)
+            // console.log(666)
             // 进行图片的上传
             if (that.data.imgList.length > 0) {
               that.uploadImgs(pInfo)
