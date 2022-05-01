@@ -18,8 +18,8 @@ Page({
                     that.name= JSON.stringify(res.data['user_name']),
                     that.uid= JSON.stringify(res.data['user_id'])
                     console.log('缓存'+res.data['user_name'])
-                    app.globalData.username = that.name
-                    app.globalData.uid = that.id
+                    app.globalData.username = res.data['user_name']
+                    app.globalData.uid = res.data['user_id']
                 if (that.name) {
                     wx.request({
                       url: 'https://tuanyi.fudan.edu.cn/register',
