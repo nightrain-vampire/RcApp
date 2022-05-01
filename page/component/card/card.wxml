@@ -1,4 +1,0 @@
-<view class="main">
-    <view>我是{{pid}}</view>
-    <view>介绍: {{intro}}</view>
-</view>

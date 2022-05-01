@@ -14,6 +14,7 @@ Page({
 
     loading: false,
     picList: [], //返回给后端的url列表
+    temppic: [],//临时本地位置
 
     picsize: '5MB', //照片的文件大小
 
@@ -26,7 +27,7 @@ Page({
     targetid: ''
   },
   onLoad(option) {
-    console.log(option.id)
+    // console.log(option.id)
     this.setData({
       userid: app.globalData.userid,
       uid: app.globalData.uid,
@@ -56,33 +57,41 @@ Page({
             reason: res.data.reason,
             details: res.data.intro,
           },
+        //   for (var index = 0; index < array.length; index++) {
+        //       const element = array[index]
+              
+        //   }
           imgList: res.data.img,
           compImgList: res.data.img
         })
-        console.log(this.data.presentee)
-        console.log(this.data.imgList)
+        for (let j = 0; j < res.data.img.length; j++) {
+            console.log('测试'+res.data.img[j])
+            that.setData({
+                temppic:[]
+            })
+            wx.downloadFile({
+              url: res.data.img[j],
+              success:function(_res){
+                  console.log(_res)
+                //   that.setData({
+                      that.data.temppic = that.data.temppic.concat(_res.tempFilePath)
+                //   })
+                  console.log(that.data.temppic)
+                  that.data.imgList = that.data.temppic
+                  that.data.compImgList = that.data.temppic
+                  console.log(that.data.imgList)
+              }
+            })
+            
+        }
+        // console.log(this.data.presentee)
+        // console.log(this.data.imgList)
       },
       fail: (e) => {
         console.log('出现小bug')
       }
     })
   }, 
-  //主要是检查有无完善联系方式
-  // checkName: function () {
-  //   if (this.data.contact == null) {
-  //     wx.showModal({
-  //       title: '提示',
-  //       content: '请先完善个人信息',
-  //       showCancel: false,
-  //       duration: 2000
-  //     })
-  //     setTimeout(() => {
-  //       wx.switchTab({
-  //         url: '../user/user',
-  //       })
-  //     }, 1500)
-  //   }
-  // },
   nameInput: function (e) {
     this.data.presentee['rname'] = e.detail.value;
   },
@@ -99,7 +108,7 @@ Page({
       sourceType: ['album'], //从相册选择
       success: (res) => {
         for (let file of res.tempFiles) {
-          console.log(file.size)
+        //   console.log(file.size)
           if(file.size >= 5000000) {
             wx.showToast({
               title:'上传图片不能大于5M!',  //标题
@@ -111,27 +120,30 @@ Page({
         if (this.data.imgList.length != 0) {
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths)
-                //tempFilePaths: 图片的本地临时文件路径列表 (本地路径)
           })
+          console.log('添加'+this.data.imgList)
         } else {
           this.setData({
             imgList: res.tempFilePaths
           })
         }
-        //console.log(res.tempFilePaths)
       },
       complete: e => {
-        for (let path of this.data.imgList) {
-          console.log(path)
+          console.log('添加压缩前'+this.data.imgList)
+          for (let p = 0; p < this.data.imgList.length; p++) {
+        //   let path of this.data.imgList
+          console.log('压缩地址'+this.data.imgList[p])
+          this.data.compImgList = []
           wx.compressImage({
             quality: 80,
-            src: path,
+            src: this.data.imgList[p],
             success: res => {
-              console.log(res.tempFilePath)
+              console.log('未push'+res.tempFilePath)
               this.data.compImgList.push(res.tempFilePath)
+              console.log('添加并压缩'+this.data.compImgList)
             },
             fail: e => {
-              console.log(e)
+            //   console.log(e)
               this.data.compImgList.push(path)
             }
           })
@@ -146,6 +158,7 @@ Page({
     });
   },
   DelImg(e) {
+      console.log('删除'+e.currentTarget.dataset.index)
     wx.showModal({
       title: '确定删除这张图片吗？',
       cancelText: '再看看',
@@ -153,11 +166,16 @@ Page({
       success: res => {
         if (res.confirm) {
           this.data.imgList.splice(e.currentTarget.dataset.index, 1);
-          this.data.compImgList.splice(e.currentTarget.dataset.index, 1);
+        //   console.log('删除之后0'+this.data.imgList)
+        //   console.log('删除之后1'+this.data.compImgList)
+        //   this.data.compImgList.splice(e.currentTarget.dataset.index, 1);
+        //   console.log('删除之后2'+this.data.compImgList)
           this.setData({
             imgList: this.data.imgList,
             compImgList: this.data.compImgList
           })
+          console.log('删除之后'+this.data.imgList)
+          console.log('删除之后'+this.data.compImgList)
         }
       }
     })
@@ -167,6 +185,7 @@ Page({
     this.setData({
       loading: true
     });
+    console.log(this.data.compImgList[this.data.fileIndex])
     wx.uploadFile({
       filePath: this.data.compImgList[this.data.fileIndex],
       name: 'file',
@@ -198,7 +217,7 @@ Page({
   uploadInfo(info) {
     var param = info
     //保存操作者的基本信息
-    param['userid'] = this.data.userid
+    param['uid'] = this.data.uid
     //保存图片
     param['pic'] = this.data.picList
     //目标id
@@ -224,7 +243,7 @@ Page({
           title: '修改成功，等待审核',
           icon: 'success'
         })
-        wx.navigateTo({
+        wx.redirectTo({
             url: '/page/component/myrecommend/myrecommend',
           })
       },
@@ -262,7 +281,14 @@ Page({
           } else if (res.confirm) {
             console.log(666)
             // 进行图片的上传
-            if (that.data.imgList.length > 0) {
+            if (that.data.imgList.length == 0) {
+                wx.showModal({
+                    cancelColor: '#999', //取消按钮的文字颜色
+                    title: '提示',
+                    content: '请填写必填字段'
+            })
+            }else if(that.data.imgList.length > 0){
+              console.log('在上传图片')
               that.uploadImgs(pInfo)
             } else {
               that.uploadInfo(pInfo)

@@ -157,7 +157,7 @@ def uploadImg():
     img = request.files.get('file')
     # path = "D:\\Term\\凌客工坊\\uis\\RcApp\\images\\"
     path = "C:\\xampp\\htdocs\\RcApp_Backend\\static\\"
-    img_name = img.filename + 'jpg'
+    img_name = img.filename
     print("圖片名字"+img_name)
     file_path = path + img_name
     img.save(file_path)
@@ -176,7 +176,7 @@ def uploadInfo():
     cur = conn.cursor()
     sql = "insert into nominee(userid,name,intro,votes,pic,state,reason) values(%s,%s,%s,%s,%s,%s,%s)"
     ImgUrl = ','.join(info['pic'])
-    cur.execute(sql,(info['userid'],info['rname'],info['details'], 0, ImgUrl, 1, info['reason']))   # 插入数据
+    cur.execute(sql,(info['uid'],info['rname'],info['details'], 0, ImgUrl, 1, info['reason']))   # 插入数据
     conn.commit()
     cur.close()
     conn.close()
@@ -192,7 +192,7 @@ def editInfo():
     cur = conn.cursor()
     sql = "update nominee set userid=%s,name=%s,intro=%s,pic=%s,state=%s,reason=%s where id=%s"
     ImgUrl = ','.join(info['pic'])
-    cur.execute(sql,(info['userid'],info['rname'],info['details'], ImgUrl, 1, info['reason'], info['targetid']))   # 插入数据
+    cur.execute(sql,(info['uid'],info['rname'],info['details'], ImgUrl, 1, info['reason'], info['targetid']))   # 插入数据
     conn.commit()
     cur.close()
     conn.close()

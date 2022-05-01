@@ -225,8 +225,15 @@ Page({
           } else if (res.confirm) {
             // console.log(666)
             // 进行图片的上传
-            if (that.data.imgList.length > 0) {
+            if (that.data.imgList.length == 0) {
+                wx.showModal({
+                    cancelColor: '#999', //取消按钮的文字颜色
+                    title: '提示',
+                    content: '请填写必填字段'
+            })
+            }else if(that.data.imgList.length > 0){
               that.uploadImgs(pInfo)
+            
             } else {
               that.uploadInfo(pInfo)
             }
