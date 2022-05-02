@@ -76,6 +76,9 @@ Page({
                     // console.log(that.data.Plength)
                     // console.log(that.data.RightShow)
                 } else {
+                    that.setData({
+                        loading: false
+                    })
                     wx.showToast({
                         title: '目前没有提名',
                         icon: 'none'
