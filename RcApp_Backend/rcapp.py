@@ -157,7 +157,7 @@ def uploadImg():
     img = request.files.get('file')
     # path = "D:\\Term\\凌客工坊\\uis\\RcApp\\images\\"
     path = "C:\\xampp\\htdocs\\RcApp_Backend\\static\\"
-    img_name = img.filename
+    img_name = img.filename + 'jpg'
     print("圖片名字"+img_name)
     file_path = path + img_name
     img.save(file_path)
