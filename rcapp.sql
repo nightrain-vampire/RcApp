@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2022-05-02 11:48:01
+-- 生成日期： 2022-05-02 12:37:04
 -- 服务器版本： 10.4.19-MariaDB
 -- PHP 版本： 7.4.19
 
@@ -45,8 +45,8 @@ CREATE TABLE `nominee` (
 INSERT INTO `nominee` (`id`, `userid`, `name`, `intro`, `votes`, `pic`, `state`, `reason`) VALUES
 (55, '18307130070', '程度', '地方', 4, 'https://tuanyi.fudan.edu.cn/static/8lPGEfXkHlQra29c9479b3421c05835301b5c988ad46.jpg', 2, '程度'),
 (56, '18307130070', '11', '111', 47, 'https://tuanyi.fudan.edu.cn/static/wHfmDX0BVlxW7e016b257adde4b5c3613731af4a30f0.jpg', 2, '11'),
-(78, '18307130070', '55555', '55555', 0, 'https://tuanyi.fudan.edu.cn/static/L15fYTHQY1zzb9cda4b4ac96aef223ab02370e63cfff..jpg', 1, '55555'),
-(79, '18307130070', '111222333', '123123', 0, 'https://tuanyi.fudan.edu.cn/static/Jijo0NZEWifi340bbfaac00ab733608221bb201cbb13..jpg,https://tuanyi.fudan.edu.cn/static/LGuVaCB6EyBRb9cda4b4ac96aef223ab02370e63cfff..jpg', 1, '123123');
+(78, '18307130070', '55555', '55555', 0, 'https://tuanyi.fudan.edu.cn/static/L15fYTHQY1zzb9cda4b4ac96aef223ab02370e63cfff.jpg', 1, '55555'),
+(79, '18307130070', '111222333', '123123', 0, 'https://tuanyi.fudan.edu.cn/static/Jijo0NZEWifi340bbfaac00ab733608221bb201cbb13.jpg,https://tuanyi.fudan.edu.cn/static/LGuVaCB6EyBRb9cda4b4ac96aef223ab02370e63cfff.jpg', 1, '123123');
 
 -- --------------------------------------------------------
 
