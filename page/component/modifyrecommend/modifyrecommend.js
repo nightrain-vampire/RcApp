@@ -31,7 +31,7 @@ Page({
     this.setData({
       userid: app.globalData.userid,
       uid: app.globalData.uid,
-      username: app.globalData.username,
+    //   username: app.globalData.username,
       targetid: option.id
     })
     this.getCurrent(option.id)
@@ -65,7 +65,7 @@ Page({
           compImgList: res.data.img
         })
         for (let j = 0; j < res.data.img.length; j++) {
-            console.log('测试'+res.data.img[j])
+            // console.log('测试'+res.data.img[j])
             that.setData({
                 temppic:[]
             })
@@ -76,10 +76,10 @@ Page({
                 //   that.setData({
                       that.data.temppic = that.data.temppic.concat(_res.tempFilePath)
                 //   })
-                  console.log(that.data.temppic)
+                //   console.log(that.data.temppic)
                   that.data.imgList = that.data.temppic
                   that.data.compImgList = that.data.temppic
-                  console.log(that.data.imgList)
+                //   console.log(that.data.imgList)
               }
             })
             
@@ -121,7 +121,7 @@ Page({
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths)
           })
-          console.log('添加'+this.data.imgList)
+        //   console.log('添加'+this.data.imgList)
         } else {
           this.setData({
             imgList: res.tempFilePaths
@@ -129,18 +129,18 @@ Page({
         }
       },
       complete: e => {
-          console.log('添加压缩前'+this.data.imgList)
+        //   console.log('添加压缩前'+this.data.imgList)
           for (let p = 0; p < this.data.imgList.length; p++) {
         //   let path of this.data.imgList
-          console.log('压缩地址'+this.data.imgList[p])
+        //   console.log('压缩地址'+this.data.imgList[p])
           this.data.compImgList = []
           wx.compressImage({
             quality: 80,
             src: this.data.imgList[p],
             success: res => {
-              console.log('未push'+res.tempFilePath)
+            //   console.log('未push'+res.tempFilePath)
               this.data.compImgList.push(res.tempFilePath)
-              console.log('添加并压缩'+this.data.compImgList)
+            //   console.log('添加并压缩'+this.data.compImgList)
             },
             fail: e => {
             //   console.log(e)
@@ -158,7 +158,7 @@ Page({
     });
   },
   DelImg(e) {
-      console.log('删除'+e.currentTarget.dataset.index)
+    //   console.log('删除'+e.currentTarget.dataset.index)
     wx.showModal({
       title: '确定删除这张图片吗？',
       cancelText: '再看看',
@@ -174,8 +174,8 @@ Page({
             imgList: this.data.imgList,
             compImgList: this.data.compImgList
           })
-          console.log('删除之后'+this.data.imgList)
-          console.log('删除之后'+this.data.compImgList)
+        //   console.log('删除之后'+this.data.imgList)
+        //   console.log('删除之后'+this.data.compImgList)
         }
       }
     })
@@ -185,14 +185,14 @@ Page({
     this.setData({
       loading: true
     });
-    console.log(this.data.compImgList[this.data.fileIndex])
+    // console.log(this.data.compImgList[this.data.fileIndex])
     wx.uploadFile({
       filePath: this.data.compImgList[this.data.fileIndex],
       name: 'file',
       url: 'https://tuanyi.fudan.edu.cn/uploadImg',
       success: (res) => {
         this.data.picList.push(res.data)
-        console.log(this.data.picList)
+        // console.log(this.data.picList)
         this.data.fileIndex = this.data.fileIndex + 1
         if (this.data.fileIndex == this.data.compImgList.length) {
           this.data.fileIndex = 0 //传完，归零
@@ -202,7 +202,7 @@ Page({
         }
       },
       fail: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -222,7 +222,7 @@ Page({
     param['pic'] = this.data.picList
     //目标id
     param['targetid'] = this.data.targetid
-    console.log(param['pic'])
+    // console.log(param['pic'])
     //发起请求
     wx.request({
       url: 'https://tuanyi.fudan.edu.cn/editInfo', //待定
@@ -235,7 +235,7 @@ Page({
         pinfo: JSON.stringify(param)
       },
       success: (res) =>  {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -248,7 +248,7 @@ Page({
           })
       },
       fail: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -260,7 +260,7 @@ Page({
     })
   },
   submit: function () {
-    console.log(this.data.presentee)
+    // console.log(this.data.presentee)
     var pInfo = this.data.presentee
     //pInfo['pic'] = ''
     var that = this
@@ -277,9 +277,9 @@ Page({
         content: '确定提交?',
         success(res) {
           if (res.cancel) {
-            console.log('操作已终止')
+            // console.log('操作已终止')
           } else if (res.confirm) {
-            console.log(666)
+            // console.log(666)
             // 进行图片的上传
             if (that.data.imgList.length == 0) {
                 wx.showModal({
@@ -288,7 +288,7 @@ Page({
                     content: '请填写必填字段'
             })
             }else if(that.data.imgList.length > 0){
-              console.log('在上传图片')
+            //   console.log('在上传图片')
               that.uploadImgs(pInfo)
             } else {
               that.uploadInfo(pInfo)

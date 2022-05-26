@@ -22,7 +22,7 @@ Page({
         that.setData({
             // userid: app.globalData.userid,
             uid: app.globalData.uid,
-            username: app.globalData.username
+            // username: app.globalData.username
         })
         that.getMyVotes();
     },
@@ -104,7 +104,7 @@ Page({
         that.setData({
             ['flag[' + index + ']']: true
         })
-        console.log(that.data.flag[index])
+        // console.log(that.data.flag[index])
     },
     //左滑控制
     toLeft: function (e) {
@@ -118,27 +118,27 @@ Page({
             that.setData({
                 ['flag[' + index + ']']: false
             })
-            console.log(that.data.flag[index])
+            // console.log(that.data.flag[index])
             var id = that.data.currentIndex[index] //获取当前卡片的索引
             // 是否解放右按钮
             if ((!that.data.RightShow[index]) && id < that.data.Plength[index]) {
                 that.setData({
                     ['RightShow[' + index + ']']: true
                 })
-                console.log(that.data.RightShow[index])
+                // console.log(that.data.RightShow[index])
             }
             // 是否隐藏左按钮
             if ((that.data.LeftShow[index]) && id == 1) {
                 that.setData({
                     ['LeftShow[' + index + ']']: false
                 })
-                console.log(that.data.LeftShow[index])
+                // console.log(that.data.LeftShow[index])
             }
             // 下一页
             that.setData({
                 ['currentIndex[' + index + ']']: id - 1
             })
-            console.log(that.data.currentIndex[index])
+            // console.log(that.data.currentIndex[index])
         }
     },
     //右滑控制
@@ -153,27 +153,27 @@ Page({
             that.setData({
                 ['flag[' + index + ']']: false
             })
-            console.log(that.data.flag[index])
+            // console.log(that.data.flag[index])
             var id = that.data.currentIndex[index] //获取当前卡片的索引
             // 是否解放左按钮
             if (id == 0) {
                 that.setData({
                     ['LeftShow[' + index + ']']: true
                 })
-                console.log(that.data.LeftShow[index])
+                // console.log(that.data.LeftShow[index])
             }
             // 是否隐藏右按钮
             if (id == that.data.Plength[index] - 2) {
                 that.setData({
                     ['RightShow[' + index + ']']: false
                 })
-                console.log(that.data.RightShow[index])
+                // console.log(that.data.RightShow[index])
             }
             // 下一页
             that.setData({
                 ['currentIndex[' + index + ']']: id + 1
             })
-            console.log(that.data.currentIndex[index])
+            // console.log(that.data.currentIndex[index])
         }
     }
 })

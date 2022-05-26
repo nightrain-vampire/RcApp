@@ -34,7 +34,7 @@ Page({
                     'chartset': 'utf-8'
                 },
                success:function(_res){
-                   app.globalData.username = _res.data.user_name,
+                //    app.globalData.username = _res.data.user_name,
                    app.globalData.uid = _res.data.user_id,
                 //    console.log('全局'+app.globalData.username)
                    wx.setStorage({

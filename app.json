@@ -3,8 +3,6 @@
         "page/component/index/index",
         "page/component/vote/vote",
         "page/component/recommend/recommend",
-        "page/component/user/user",
-        "page/component/voterule/voterule",
         "page/component/uis/uis",
         "page/component/loading/loadind",
         "page/component/myrecommend/myrecommend",  

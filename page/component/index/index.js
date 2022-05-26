@@ -14,13 +14,13 @@ Page({
             //需要在登录功能中调用wx.setStorage并把 key 设置为info
             key: 'info',
             success: function (res) {
-                // console.log('index的数据：' + JSON.stringify(res.data))
-                    that.name= JSON.stringify(res.data['user_name']),
+                console.log('index的数据：' + JSON.stringify(res.data))
+                    // that.name= JSON.stringify(res.data['user_name']),
                     that.uid= JSON.stringify(res.data['user_id'])
-                    console.log('缓存'+res.data['user_name'])
-                    app.globalData.username = res.data['user_name']
+                    // console.log('缓存'+res.data['user_name'])
+                    // app.globalData.username = res.data['user_name']
                     app.globalData.uid = res.data['user_id']
-                if (that.name) {
+                if (that.uid) {
                     wx.request({
                       url: 'https://tuanyi.fudan.edu.cn/register',
                       method:'POST',
@@ -29,7 +29,7 @@ Page({
                         'chartset': 'utf-8'
                       },
                       data:{
-                          username: that.name,
+                        //   username: that.name,
                           uid: that.uid
                       },
                       success : function(res){
@@ -66,12 +66,12 @@ Page({
             key: 'info',
             success: function (res) {
                 // console.log('index的数据：' + JSON.stringify(res.data))
-                    that.name= JSON.stringify(res.data['user_name']),
+                    // that.name= JSON.stringify(res.data['user_name']),
                     that.uid= JSON.stringify(res.data['user_id'])
-                    console.log('缓存'+res.data['user_name'])
-                    app.globalData.username = res.data['user_name']
+                    // console.log('缓存'+res.data['user_name'])
+                    // app.globalData.username = res.data['user_name']
                     app.globalData.uid = res.data['user_id']
-                if (that.name) {
+                if (that.uid) {
                     wx.request({
                         url: 'https://tuanyi.fudan.edu.cn/register',
                         method:'POST',
@@ -80,7 +80,7 @@ Page({
                           'chartset': 'utf-8'
                         },
                         data:{
-                            username: that.name,
+                            // username: that.name,
                             uid: that.uid
                         },
                         success : function(res){
@@ -116,11 +116,11 @@ Page({
             key: 'info',
             success: function (res) {
                 // console.log('index的数据：' + JSON.stringify(res.data))
-                    that.name= JSON.stringify(res.data['user_name']),
+                    // that.name= JSON.stringify(res.data['user_name']),
                     that.uid= JSON.stringify(res.data['user_id'])
-                    app.globalData.username = res.data['user_name']
+                    // app.globalData.username = res.data['user_name']
                     app.globalData.uid = res.data['user_id']
-                if (that.name) {
+                if (that.uid) {
                     wx.request({
                         url: 'https://tuanyi.fudan.edu.cn/register',
                         method:'POST',
@@ -129,7 +129,7 @@ Page({
                           'chartset': 'utf-8'
                         },
                         data:{
-                            username: that.name,
+                            // username: that.name,
                             uid: that.uid
                         },
                         success : function(res){

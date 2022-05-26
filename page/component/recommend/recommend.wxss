@@ -130,7 +130,7 @@
 }
 
 .photo-title3 {
-    font-size: small;
+    /* font-size: small; */
     color: grey;
     font-weight: lighter;
     padding-top: 5rpx;

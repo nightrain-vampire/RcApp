@@ -32,7 +32,7 @@ Page({
   },
   getLeft: function () {
     this.setData({
-      username: app.globalData.username,
+    //   username: app.globalData.username,
       uid: app.globalData.uid,
     //   userid: app.globalData.userid
     })
@@ -228,7 +228,7 @@ Page({
         },
         data: {
           card: obj.id,
-          votes: this.data.userid
+          votes: this.data.uid
         },
         success: (res) => {
             // console.log("daad")

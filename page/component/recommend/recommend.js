@@ -26,7 +26,7 @@ Page({
     this.setData({
       userid: app.globalData.userid,
       uid: app.globalData.uid,
-      username: app.globalData.username
+    //   username: app.globalData.username
     })
   },
   //主要是检查有无完善联系方式
@@ -83,16 +83,16 @@ Page({
       },
       complete: e => {
         for (let path of this.data.imgList) {
-          console.log(path)
+        //   console.log(path)
           wx.compressImage({
             quality: 80,
             src: path,
             success: res => {
-              console.log(res.tempFilePath)
+            //   console.log(res.tempFilePath)
               this.data.compImgList.push(res.tempFilePath)
             },
             fail: e => {
-              console.log(e)
+            //   console.log(e)
               this.data.compImgList.push(path)
             }
           })
@@ -138,7 +138,7 @@ Page({
         // console.log("图片"+res.data)
         //pInfo['pic'] = pInfo['pic'] + res.data 
         this.data.picList.push(res.data)
-        console.log(this.data.picList)
+        // console.log(this.data.picList)
         this.data.fileIndex = this.data.fileIndex + 1
         if (this.data.fileIndex == this.data.compImgList.length) {
           this.data.fileIndex = 0 //传完，归零
@@ -148,7 +148,7 @@ Page({
         }
       },
       fail: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -179,7 +179,7 @@ Page({
         pinfo: JSON.stringify(param)
       },
       success: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -192,7 +192,7 @@ Page({
         })
       },
       fail: (res) => {
-        console.log(res)
+        // console.log(res)
         this.setData({
           loading: false
         });
@@ -221,7 +221,7 @@ Page({
         content: '确定提交?',
         success(res) {
           if (res.cancel) {
-            console.log('操作已终止')
+            // console.log('操作已终止')
           } else if (res.confirm) {
             // console.log(666)
             // 进行图片的上传
