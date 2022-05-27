@@ -38,7 +38,7 @@
             </view>
             <view class="mask" wx:if="{{maskflag}}" bindtap="closeMask">
                 <view class="detail">
-                    <view class="tophalf">
+                    <!-- <view class="tophalf"> -->
                         <view class="depic">
                             <swiper style="width: 100%; height: 100%; padding-bottom: 10rpx;" indicator-dots="true" autoplay="true" interval="3500" circular="true">
                                 <swiper-item wx:for="{{detailData}}">
@@ -48,7 +48,7 @@
                         </view>
                         <view style="font-size: large; font-weight: 600;">{{name}}</view>
                         <view style="word-break: keep-all; word-wrap: break-word; white-space: pre-line; font-weight: 300;">{{intro}}</view>
-                    </view>
+                    <!-- </view> -->
                     <view class="divLine"></view>
                     <view class="divLine2"></view>
                     <view class="bottomhalf">

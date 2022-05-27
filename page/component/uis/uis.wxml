@@ -1,1 +1,1 @@
-<web-view src="https://tac.fudan.edu.cn/oauth2/authorize.act?client_id=28f0cf32-127b-430f-a975-4f6f395b7798&scope=username school&response_type=code&state=weGo123&redirect_uri=http://tuanyi.fudan.edu.cn/uis" bindmessage="handleGetMessage"></web-view>
+<web-view src="https://tac.fudan.edu.cn/oauth2/authorize.act?client_id=28f0cf32-127b-430f-a975-4f6f395b7798&scope=username school&response_type=code&state=weGo123&redirect_uri=https://tuanyi.fudan.edu.cn/uis" bindmessage="handleGetMessage"></web-view>

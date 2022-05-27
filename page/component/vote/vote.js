@@ -30,6 +30,29 @@ Page({
     this.getLeft();
     this.getVotes();
   },
+  //分享给好友
+  onShareAppMessage: function () {
+    // 获取当前页面路径
+    // const pages = getCurrentPages(); 
+    // const currentPage = pages[pages.length - 1].route;
+    // 构造分享页面显示内容
+    //在path中可通过在页面路径添加?可传递参数
+    return {
+      title: '复旦团艺',
+      path: 'page/component/index/index',
+      imageUrl: ''
+    }
+  },
+  //分享到朋友圈
+//   onShareTimeline: function () {
+//     // 构造分享页面显示内容
+//     //query：自定义页面路径中携带的参数，如 path?a=1&b=2 的 “?” 后面部分
+//     return {
+//       title: '复旦团艺',
+//       imageUrl: '',
+//       path: 'page/component/index',
+//     }
+//   },
   getLeft: function () {
     this.setData({
     //   username: app.globalData.username,

@@ -140,6 +140,7 @@ input {
     left: 3%;
     top: 20%;
     padding: 40rpx;
+    overflow: scroll;
 }
 
 .tophalf {

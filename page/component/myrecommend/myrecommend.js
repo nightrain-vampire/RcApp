@@ -26,6 +26,19 @@ Page({
         })
         that.getMyVotes();
     },
+    //分享给好友
+  onShareAppMessage: function () {
+    // 获取当前页面路径
+    // const pages = getCurrentPages(); 
+    // const currentPage = pages[pages.length - 1].route;
+    // 构造分享页面显示内容
+    //在path中可通过在页面路径添加?可传递参数
+    return {
+      title: '复旦团艺',
+      path: 'page/component/index/index',
+      imageUrl: ''
+    }
+  },
     toEdit(e) {
         var id = e.target.id
         // console.log(id)

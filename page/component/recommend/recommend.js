@@ -60,8 +60,9 @@ Page({
       sizeType: 'compressed', //压缩图
       sourceType: ['album'], //从相册选择
       success: (res) => {
+        //   console.log('res'+res.tempFiles)
         for (let file of res.tempFiles) {
-          console.log(file.size)
+        //   console.log('daxiao'+file.size)
           if(file.size >= 5000000) {
             wx.showToast({
               title:'上传图片不能大于5M!',  //标题
@@ -71,10 +72,12 @@ Page({
           }
         }
         if (this.data.imgList.length != 0) {
+            // console.log('lujing'+res.tempFilePaths)
           this.setData({
             imgList: this.data.imgList.concat(res.tempFilePaths) //tempFilePaths: 图片的本地临时文件路径列表 (本地路径)
           })
         } else {
+            // console.log('lujingelse'+res.tempFilePaths)
           this.setData({
             imgList: res.tempFilePaths
           })
@@ -82,17 +85,19 @@ Page({
         //console.log(res.tempFilePaths)
       },
       complete: e => {
+        this.data.compImgList = []
         for (let path of this.data.imgList) {
         //   console.log(path)
           wx.compressImage({
             quality: 80,
             src: path,
             success: res => {
-            //   console.log(res.tempFilePath)
+            //   this.data.compImgList = null
+            //   console.log('yasuo'+this.data.compImgList)
               this.data.compImgList.push(res.tempFilePath)
             },
             fail: e => {
-            //   console.log(e)
+            //   console.log('fail'+e)
               this.data.compImgList.push(path)
             }
           })
@@ -126,16 +131,16 @@ Page({
   //上传图片
   uploadImgs(pInfo) {
     // console.log("图片"+this.data.imgList)
+    // console.log("compress图片"+this.data.compImgList)
     this.setData({
       loading: true
     });
-    // console.log("图片"+that.data.imgList[that.data.fileIndex])
     wx.uploadFile({
       filePath: this.data.compImgList[this.data.fileIndex],
       name: 'file',
       url: 'https://tuanyi.fudan.edu.cn/uploadImg', //待定
       success: (res) => {
-        // console.log("图片"+res.data)
+        console.log("图片"+res.data)
         //pInfo['pic'] = pInfo['pic'] + res.data 
         this.data.picList.push(res.data)
         // console.log(this.data.picList)
@@ -167,6 +172,7 @@ Page({
     param['uid'] = this.data.uid
     //保存图片
     param['pic'] = this.data.picList
+    // console.log(this.data.picList)
     //发起请求
     wx.request({
       url: 'https://tuanyi.fudan.edu.cn/uploadInfo', //待定
