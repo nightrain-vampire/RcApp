@@ -1,15 +1,12 @@
 <view class="main">
+    <view style="display: block;position: fixed;left: 0%;top: 0%;width: 25%;height: fit-content;">
+    <image src="../../static/logo.png" mode="widthFix" style="width: 100%;"></image>
+    </view>
     <view class="head-bg">
         <view class="nav-area">
-            <!-- <navigator url="/page/component/recommend/recommend" class="nav"> -->
                 <image src="../../static/recom.png" mode="aspectFit" class="bimg" bindtap="uisTorec"></image>
-            <!-- </navigator> -->
-            <!-- <navigator url="/page/component/vote/vote" class="nav"> -->
                 <image src="../../static/vote.png" mode="aspectFit" class="bimg" bindtap="uisTovot"></image>
-            <!-- </navigator> -->
-            <!-- <navigator url="/page/component/myrecommend/myrecommend" class="nav"> -->
                 <image src="../../static/myvote.png" mode="aspectFit" class="bimg" bindtap="uisTomyr"></image>
-            <!-- </navigator> -->
         </view>
     </view>
 </view>

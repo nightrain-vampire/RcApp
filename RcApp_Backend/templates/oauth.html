@@ -8,14 +8,16 @@
             var r = window.location.search.substr(1).match(reg); //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
     }
-    var clientID = "d84955ac-93cc-4041-b091-4559e40a28c7";
-    var clientSecret = "DkZ2VPZR1ZzVWt8DRKQW";
+    // var clientID = "d84955ac-93cc-4041-b091-4559e40a28c7";
+    // var clientSecret = "DkZ2VPZR1ZzVWt8DRKQW";
+    var clientID = "28f0cf32-127b-430f-a975-4f6f395b7798";
+    var clientSecret = "faxDvTRHGVwy3LmDbQN2";
     var code =getUrlParam("code");
     var state=getUrlParam("state");
     if (state!="weGo123") {
         wx.miniProgram.navigateBack({delta: 4});
     }else{
-        var url="https://tac.fudan.edu.cn/oauth2/token.act?client_id="+clientID+"&client_secret="+clientSecret+"&grant_type=authorization_code&redirect_uri=http://tuanyi.fudan.edu.cn/uis&code="+code              
+        var url="https://tac.fudan.edu.cn/oauth2/token.act?client_id="+clientID+"&client_secret="+clientSecret+"&grant_type=authorization_code&redirect_uri=https://tuanyi.fudan.edu.cn/uis&code="+code              
             wx.miniProgram.navigateBack({delta: 4});
             console.log(url)
             wx.miniProgram.postMessage({

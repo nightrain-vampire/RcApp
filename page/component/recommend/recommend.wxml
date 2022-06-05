@@ -21,7 +21,7 @@
     <view class="reason-area">
       <view class="reason-box">
         <view class="reason-title">提名人理由:</view>
-        <textarea bindinput="reasonBlur" class="reason-input" />
+        <textarea placeholder="（500字以内）" maxlength="500" bindinput="reasonBlur" class="reason-input" />
       </view>
     </view>
 
@@ -48,7 +48,7 @@
     <view class="info-area">
       <view class="info-box">
         <view class="reason-title">提名人信息:</view>
-        <textarea bindinput="bindTextAreaBlur" class="info-input" />
+        <textarea placeholder="（500字以内）" maxlength="500" bindinput="bindTextAreaBlur" class="info-input" />
       </view>
     </view>
 
